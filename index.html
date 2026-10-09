@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plan Dual a la Cordobesa · DGETyFP · Ministerio de Educación de Córdoba</title>
+<meta name="description" content="Plan Dual a la Cordobesa: la educación técnica y el sector productivo, una sola unidad formativa. Información para escuelas técnicas y empresas de la Provincia de Córdoba.">
+<meta property="og:title" content="Plan Dual a la Cordobesa">
+<meta property="og:description" content="Educación técnica y sector productivo, una sola unidad formativa. Práctico · Territorial · Formador.">
+<meta property="og:image" content="assets/side.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='19' fill='%231B2E5E'/%3E%3Ccircle cx='20' cy='20' r='7' fill='%23C55A11'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B2E5E; --deep:#14234a; --orange:#C55A11; --orange2:#E07B39; --green:#52A14D;
+  --sky:#69ACDF; --muted:#5A6685; --pale:#C9D4EE; --light:#F4F6FA; --line:#E3E8F2; --gold:#D4A24C; --red:#C8102E;
+  --shadow:0 8px 30px rgba(27,46,94,.10); --r:16px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;font-family:Lato,Calibri,Arial,sans-serif;color:var(--navy);background:#fff;-webkit-font-smoothing:antialiased;line-height:1.55}
+h1,h2,h3{font-family:Lora,Cambria,Georgia,serif;margin:0;line-height:1.2}
+a{color:inherit}
+img{max-width:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.kicker{font-size:12.5px;letter-spacing:3px;font-weight:900;color:var(--orange);text-transform:uppercase;margin-bottom:10px}
+.sec{padding:84px 0}
+.sec.alt{background:var(--light)}
+.sec-title{font-size:clamp(28px,4vw,40px);margin-bottom:14px}
+.lead{font-size:18px;color:var(--muted);max-width:780px;margin:0 0 34px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:12px;font-weight:900;font-size:15px;text-decoration:none;border:0;cursor:pointer;font-family:inherit;transition:transform .15s, box-shadow .15s, background .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn-or{background:var(--orange);color:#fff;box-shadow:0 8px 20px rgba(197,90,17,.35)}
+.btn-or:hover{background:#d8651a}
+.btn-ln{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.55)}
+.btn-ln:hover{background:rgba(255,255,255,.1)}
+.btn-nv{background:var(--navy);color:#fff}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- Header ---------- */
+.band{height:56px;background:var(--green) url(assets/band.png) right center/auto 100% no-repeat}
+header.nav{position:sticky;top:0;z-index:50;background:var(--navy);color:#fff;box-shadow:0 4px 18px rgba(0,0,0,.18)}
+header.nav .wrap{display:flex;align-items:center;gap:18px;height:68px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand small{display:block;font-size:10px;letter-spacing:2.5px;color:var(--orange2);font-weight:900}
+.brand b{font-family:Lora,serif;font-size:18px}
+nav.links{margin-left:auto;display:flex;gap:4px}
+nav.links a{color:var(--pale);text-decoration:none;font-weight:700;font-size:14px;padding:8px 10px;border-radius:8px}
+nav.links a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.menu-btn{display:none;margin-left:auto;background:none;border:0;color:#fff;cursor:pointer;padding:8px}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;background:radial-gradient(ellipse at 70% 40%,#2a4688 0%,var(--navy) 55%,var(--deep) 100%);color:#fff;overflow:hidden}
+.hero .deco{position:absolute;left:0;top:0;bottom:0;width:250px;background:url(assets/side.png) right center/cover no-repeat}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;padding-top:90px;padding-bottom:90px;padding-left:280px;max-width:1440px}
+.hero h1{font-size:clamp(38px,5.4vw,64px);margin:6px 0 16px}
+.hero h1 em{font-style:normal;color:var(--orange2)}
+.hero p.sub{font-size:20px;color:var(--pale);margin:0 0 18px;max-width:600px}
+.pills{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 30px}
+.pills span{border:1px solid rgba(201,212,238,.4);border-radius:999px;padding:6px 14px;font-size:12px;font-weight:900;letter-spacing:2px}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.quote{align-self:center;background:rgba(255,255,255,.07);border:1px solid rgba(201,212,238,.22);border-radius:18px;padding:28px;backdrop-filter:blur(4px)}
+.quote p{font-family:Lora,serif;font-style:italic;font-size:19px;margin:0 0 16px;line-height:1.5}
+.quote b{display:block;color:#fff}
+.quote small{color:var(--pale)}
+.journey .jrow{display:flex;gap:16px;align-items:center}
+.journey .jnum{font-family:Lato;font-weight:900;font-size:46px;line-height:1;color:var(--sky);min-width:70px;text-align:center}
+.journey .jnum.big{color:var(--orange2);font-size:64px}
+.journey b{display:block;font-size:17px}
+.journey small{color:var(--pale);font-size:13px}
+.jline{height:56px;margin-left:34px;border-left:3px dashed rgba(201,212,238,.4);position:relative}
+.jline i{position:absolute;left:-3px;top:0;width:3px;height:0;background:var(--orange2);animation:grow 2.2s ease .6s forwards}
+@keyframes grow{to{height:100%}}
+.jlink{display:inline-block;margin-top:18px;color:var(--orange2);font-weight:900;text-decoration:none}
+.qmark{font-family:Lora,serif;font-size:70px;line-height:.5;color:var(--orange2)}
+
+/* ---------- Cifras ---------- */
+.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;margin-top:-52px;position:relative;z-index:5}
+.stat{padding:22px 16px;text-align:center}
+.stat .v{font-size:44px;font-weight:900;line-height:1;color:var(--navy)}
+.stat .l{font-size:12.5px;letter-spacing:1.8px;font-weight:900;color:var(--muted);margin-top:8px}
+.stat:nth-child(1) .v{color:var(--orange)} .stat:nth-child(2) .v{color:var(--green)} .stat:nth-child(4) .v{color:#3a86c4}
+
+/* ---------- Video ---------- */
+.video-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:36px;align-items:center}
+.video{position:relative;padding-top:56.25%;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);background:var(--navy)}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* ---------- Qué es ---------- */
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.feat{padding:26px}
+.ic{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.feat h3{font-size:20px;margin-bottom:8px}
+.feat p{margin:0;color:var(--muted)}
+
+/* ---------- Alternancia animada ---------- */
+.alt-box{background:var(--navy);border-radius:20px;color:#fff;padding:34px;margin-bottom:28px;overflow:hidden}
+.alt-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:22px}
+.alt-head h3{font-size:24px}
+.legend{display:flex;gap:16px;font-size:13px;color:var(--pale);align-items:center}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:4px;margin-right:6px;vertical-align:-2px}
+.weeks{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:10px}
+.wk{border-radius:12px;padding:16px 8px;text-align:center;font-weight:900;font-size:13px;opacity:.25;transform:scale(.94);transition:all .5s}
+.wk svg{display:block;margin:0 auto 8px}
+.wk.on{opacity:1;transform:scale(1)}
+.wk.esc{background:var(--sky);color:var(--navy)} .wk.emp{background:var(--orange);color:#fff}
+.alt-note{margin-top:22px;border-top:1px solid rgba(201,212,238,.25);padding-top:18px}
+.alt-note b{font-size:16px}
+.alt-note p{margin:6px 0 0;color:var(--pale);font-size:15px;max-width:820px}
+.alt-cap{margin-top:18px;color:var(--pale);font-size:14.5px;min-height:24px}
+.roles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.role{padding:22px}
+.role h4{margin:0 0 6px;font-size:16px}
+.role p{margin:0;font-size:14px;color:var(--muted)}
+
+/* ---------- Tabla modelos ---------- */
+.tbl{overflow-x:auto;border-radius:16px;box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;min-width:760px;background:#fff}
+th{background:var(--navy);color:#fff;text-align:left;padding:14px 16px;font-size:13px;letter-spacing:1px}
+td{padding:14px 16px;border-bottom:1px solid var(--line);font-size:14.5px;vertical-align:top}
+tr.hl td{background:#FFF6EF}
+tr.hl td:first-child{border-left:4px solid var(--orange)}
+
+/* ---------- Tabs ---------- */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.tabs button{border:2px solid var(--line);background:#fff;color:var(--navy);padding:12px 20px;border-radius:999px;font-weight:900;font-size:15px;cursor:pointer;font-family:inherit}
+.tabs button.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.tabpane{display:none}
+.tabpane.on{display:block;animation:fade .4s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}}
+.checks{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.checks li{display:flex;gap:12px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.checks li b{display:block}
+.checks li span{color:var(--muted);font-size:14.5px}
+.tick{flex:0 0 28px;height:28px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900}
+
+/* ---------- Normativa ---------- */
+.norms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.norm{padding:20px;border-top:4px solid var(--navy)}
+.norm:nth-child(3n+2){border-top-color:var(--green)} .norm:nth-child(3n){border-top-color:var(--orange)}
+.norm b{display:block;font-size:16px;margin-bottom:4px}
+.norm span{font-size:14px;color:var(--muted)}
+.legal-cta{margin-top:26px;background:var(--navy);color:#fff;border-radius:16px;padding:24px 28px;display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.legal-cta p{margin:0;color:var(--pale);max-width:720px}
+
+/* ---------- Postulación ---------- */
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.step{padding:26px 26px 22px 84px;position:relative}
+.step:before{counter-increment:s;content:counter(s);position:absolute;left:24px;top:24px;width:44px;height:44px;border-radius:50%;background:var(--orange);color:#fff;font-weight:900;font-size:20px;display:flex;align-items:center;justify-content:center}
+.step h3{font-size:19px;margin-bottom:8px}
+.step ul{margin:0;padding-left:18px;color:var(--muted);font-size:14.5px}
+.notice{margin-top:24px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;background:#FFF6EF;border:1px solid #F3C9A8;border-radius:16px;padding:22px 26px}
+.notice p{margin:4px 0 0;color:#7a3a0d}
+.deadline{display:inline-block;background:var(--orange);color:#fff;border-radius:8px;padding:2px 10px;font-weight:900}
+
+/* ---------- Red ---------- */
+.duplas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.dupla{display:flex;align-items:center;gap:12px;padding:16px 18px}
+.dupla .s{font-weight:900}
+.dupla .e{color:var(--muted);font-size:14px}
+.dupla .x{width:34px;height:34px;flex:0 0 34px;border-radius:50%;background:var(--light);display:flex;align-items:center;justify-content:center;color:var(--orange);font-weight:900}
+.logos{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.logos span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-weight:700;font-size:14px}
+.proy{margin-top:30px;background:linear-gradient(135deg,var(--navy),#2a4688);color:#fff;border-radius:20px;padding:30px}
+.proy p{color:var(--pale);margin:8px 0 0}
+
+/* ---------- Experiencias ---------- */
+.tl{position:relative;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;margin:10px 0 44px}
+.tl:before{content:"";position:absolute;left:4%;right:4%;top:23px;height:4px;background:linear-gradient(90deg,var(--sky),var(--orange));border-radius:4px}
+.tl .p{position:relative;text-align:center}
+.tl .dot{width:50px;height:50px;border-radius:50%;margin:0 auto 10px;background:#fff;border:4px solid var(--sky);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px;position:relative;z-index:1}
+.tl .p:nth-child(n+4) .dot{border-color:var(--orange)}
+.tl .p.hoy .dot{background:var(--orange);color:#fff;border-color:var(--orange);width:60px;height:60px;margin-top:-5px;font-size:20px}
+.tl b{display:block;font-size:13px}
+.tl small{display:block;color:var(--muted);font-size:12px;line-height:1.35}
+.exps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.exp{overflow:hidden;display:flex;flex-direction:column}
+.exp .ph{aspect-ratio:4/4.4;max-width:100%;background:var(--light) center 30%/cover no-repeat;position:relative;overflow:hidden}
+.exp.wide{grid-column:1/-1;flex-direction:row}
+.exp.wide .ph{flex:1.5;aspect-ratio:auto;min-height:320px;background-position:center}
+.exp.wide .bd{flex:1;align-self:center}
+@media (max-width:760px){.exp.wide{flex-direction:column}.exp.wide .ph{flex:none;aspect-ratio:3/2;min-height:0}}
+.exp .ph.land{background:var(--navy)}
+.exp .ph.land:before{content:"";position:absolute;inset:-20px;background:inherit;background-image:var(--img);background-size:cover;background-position:center;filter:blur(14px) brightness(.75)}
+.exp .ph.land:after{content:"";position:absolute;inset:0;background:var(--img) center/contain no-repeat}
+.exp .bd{padding:20px 22px 22px}
+.exp .dt{font-size:12px;letter-spacing:2px;font-weight:900;color:var(--orange)}
+.exp h3{font-size:19px;margin:6px 0 8px}
+.exp p{margin:0;color:var(--muted);font-size:14.5px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.tags span{background:var(--light);border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700}
+.closed.open{background:#E6F3E5;color:#2f6b2c}
+.aviso{margin-top:18px;display:grid;grid-template-columns:auto 1fr auto auto;gap:16px;align-items:center;background:var(--navy);color:#fff;border-radius:16px;padding:20px 22px;animation:fade .35s ease}
+.aviso p{margin:4px 0 0;color:var(--pale)}
+.aviso-ic{width:42px;height:42px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:22px}
+.aviso-x{background:none;border:0;color:#fff;font-size:26px;cursor:pointer;line-height:1;padding:4px 8px}
+@media (max-width:700px){.aviso{grid-template-columns:auto 1fr}.aviso .btn{grid-column:1/-1}.aviso-x{position:absolute;right:10px;top:8px}.aviso{position:relative}}
+.closed{display:inline-flex;align-items:center;gap:8px;background:#FDE8EB;color:#9b0f24;border-radius:999px;padding:6px 14px;font-weight:900;font-size:13px;margin-bottom:14px}
+@media (max-width:1100px){.exps{grid-template-columns:repeat(2,minmax(0,1fr))}.tl{grid-template-columns:repeat(4,minmax(0,1fr));row-gap:24px}.tl:before{display:none}}
+@media (max-width:640px){.exps{grid-template-columns:1fr}.tl{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ---------- FAQ ---------- */
+.faq details{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:12px;padding:0 22px}
+.faq summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:900;font-size:16.5px;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";color:var(--orange);font-size:24px;line-height:1}
+.faq details[open] summary:after{content:"–"}
+.faq details p{margin:0 0 18px;color:var(--muted)}
+
+/* ---------- Contacto ---------- */
+.contact{display:grid;grid-template-columns:.85fr 1.15fr;gap:36px;align-items:start}
+.contact-info{background:var(--navy);color:#fff;border-radius:20px;padding:32px;position:relative;overflow:hidden}
+.contact-info:after{content:"";position:absolute;right:-60px;bottom:-60px;width:200px;height:200px;border-radius:50%;background:var(--orange);opacity:.18}
+.contact-info p,.contact-info ul,.contact-info h2,.contact-info .kicker{position:relative;z-index:1}
+.contact-info p{color:var(--pale)}
+.contact-info ul{padding-left:18px;color:var(--pale)}
+form.card{padding:30px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.f label{display:block;font-size:12px;letter-spacing:1.2px;font-weight:900;color:var(--muted);margin-bottom:6px}
+.f input,.f select,.f textarea{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:15px;color:var(--navy);background:#fff}
+.f input:focus,.f select:focus,.f textarea:focus{outline:2px solid var(--sky);border-color:var(--sky)}
+.perfil{display:flex;flex-wrap:wrap;gap:8px}
+.perfil label{cursor:pointer;position:relative}
+.perfil input{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
+.perfil span{display:inline-block;border:2px solid var(--line);border-radius:999px;padding:9px 16px;font-weight:900;font-size:14px;color:var(--muted)}
+.perfil input:checked+span{background:var(--navy);border-color:var(--navy);color:#fff}
+.perfil input:focus-visible+span{outline:2px solid var(--sky)}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--muted);margin:6px 0 10px}
+.hp{position:absolute;left:-9999px}
+.msg{margin-top:14px;border-radius:12px;padding:14px 16px;font-weight:700;display:none}
+.msg.ok{display:block;background:#E8F5E7;color:#2d6a29}
+.msg.err{display:block;background:#FDE8EB;color:#9b0f24}
+
+footer{background:var(--deep);color:var(--pale);padding:40px 0;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer b{color:#fff}
+
+@media (max-width:1100px){
+  .hero .deco{width:140px;opacity:.6}
+  .hero .wrap{grid-template-columns:1fr;padding-left:170px}
+  .stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .roles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .norms,.duplas{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .video-grid,.contact{grid-template-columns:1fr}
+}
+@media (max-width:820px){
+  nav.links{display:none;position:absolute;top:68px;left:0;right:0;background:var(--navy);flex-direction:column;padding:10px 16px 18px}
+  nav.links.open{display:flex}
+  .menu-btn{display:block}
+}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  .sec{padding:60px 0}
+  .band{height:40px}
+  .hero .deco{display:none}
+  .hero .wrap{padding:60px 16px 80px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat .v{font-size:36px}
+  .grid3,.grid2,.roles,.norms,.duplas,.steps,.checks,.frow{grid-template-columns:1fr}
+  .weeks{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .alt-box{padding:22px}
+  .notice{grid-template-columns:1fr}
+  .step{padding:80px 22px 22px}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.reveal{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<div class="band" aria-hidden="true"></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#inicio">
+      <svg width="38" height="38" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="7" fill="#C55A11"/><g stroke="#C9D4EE" stroke-width="1.4" opacity=".7"><line x1="20" y1="20" x2="20" y2="4"/><line x1="20" y1="20" x2="34" y2="12"/><line x1="20" y1="20" x2="34" y2="28"/><line x1="20" y1="20" x2="20" y2="36"/><line x1="20" y1="20" x2="6" y2="28"/><line x1="20" y1="20" x2="6" y2="12"/></g><g fill="#69ACDF"><circle cx="20" cy="4" r="3"/><circle cx="34" cy="12" r="3"/><circle cx="34" cy="28" r="3" fill="#52A14D"/><circle cx="20" cy="36" r="3"/><circle cx="6" cy="28" r="3" fill="#52A14D"/><circle cx="6" cy="12" r="3"/></g></svg>
+      <span><small>DGETyFP · CÓRDOBA</small><b>Plan Dual</b></span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="links" id="links">
+      <a href="#que-es">Qué es</a>
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#experiencias">Experiencias</a>
+      <a href="#escuelas-empresas">Escuelas y empresas</a>
+      <a href="#normativa">Normativa</a>
+      <a href="#postulacion">Postulación <span data-cfg="ciclo">2027</span></a>
+      <a href="#preguntas">Preguntas</a>
+      <a href="#contacto" class="btn btn-or" style="padding:8px 16px;color:#fff">Consultanos</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="deco" aria-hidden="true"></div>
+  <div class="wrap">
+    <div>
+      <div class="kicker" style="color:var(--orange2)">Ministerio de Educación · Provincia de Córdoba</div>
+      <h1>Plan Dual <em>a la Cordobesa</em></h1>
+      <p class="sub">Educación técnica y sector productivo, una sola unidad formativa.</p>
+      <div class="pills"><span>PRÁCTICO</span><span>TERRITORIAL</span><span>FORMADOR</span></div>
+      <div class="ctas">
+        <a class="btn btn-or" href="#escuelas-empresas" data-tab="escuelas">Soy escuela técnica</a>
+        <a class="btn btn-ln" href="#escuelas-empresas" data-tab="empresas">Soy empresa</a>
+      </div>
+    </div>
+    <div class="quote journey">
+      <div class="kicker" style="color:var(--orange2);margin-bottom:14px">Nuestro recorrido</div>
+      <div class="jrow"><div class="jnum big" data-cfg="escuelas">16</div><div><b>escuelas técnicas hoy</b><small><span data-cfg="empresas">45</span> empresas e instituciones co-formadoras en <span data-cfg="localidades">8</span> localidades</small></div></div>
+      <a href="#experiencias" class="jlink">Conocé las experiencias →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CIFRAS -->
+<div class="wrap">
+  <div class="stats">
+    <div class="card stat"><div class="v" data-count="16" data-cfgn="escuelas">16</div><div class="l">ESCUELAS TÉCNICAS</div></div>
+    <div class="card stat"><div class="v" data-count="45" data-cfgn="empresas">45</div><div class="l">EMPRESAS SOCIAS</div></div>
+    <div class="card stat"><div class="v" data-count="252" data-cfgn="estudiantes">252</div><div class="l">ESTUDIANTES</div></div>
+    <div class="card stat"><div class="v" data-count="8" data-cfgn="localidades">8</div><div class="l">LOCALIDADES</div></div>
+    <div class="card stat"><div class="v" data-count="10" data-cfgn="especialidades">10</div><div class="l">ESPECIALIDADES</div></div>
+  </div>
+</div>
+
+<!-- QUÉ ES -->
+<section class="sec" id="que-es">
+  <div class="wrap">
+    <div class="video-grid reveal">
+      <div>
+        <div class="kicker">El programa</div>
+        <h2 class="sec-title">El aula se expande hasta la planta</h2>
+        <p class="lead" style="margin-bottom:18px">El Plan Dual a la Cordobesa articula el último año de las escuelas técnicas con el sector productivo: los estudiantes de 7° año cursan parte de su formación directamente en planta, en empresas co-formadoras.</p>
+        <p style="color:var(--muted);margin:0">Es un modelo práctico, territorial y formador que mejora la empleabilidad de los jóvenes, alinea la formación con las demandas reales del entramado productivo y fortalece la alianza entre el Estado, la escuela y el sector privado. Se inspira en los modelos de educación dual de Alemania, Austria y Suiza, adaptado a la identidad productiva de cada región de Córdoba.</p>
+      </div>
+      <div class="video" id="videoBox"></div>
+    </div>
+
+    <div class="grid3" style="margin-top:56px">
+      <div class="card feat reveal"><div class="ic" style="background:#FBEBDF"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C55A11" stroke-width="2.2" stroke-linecap="round"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"/></svg></div><h3>No es una pasantía convencional</h3><p>Es un sistema de corresponsabilidad pedagógica: los contenidos de la escuela se articulan con las actividades en la empresa, bajo un plan de formación común.</p></div>
+      <div class="card feat reveal"><div class="ic" style="background:#E6F3E5"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#52A14D" stroke-width="2.2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3>Docente y tutor, una unidad</h3><p>La escuela define el "qué aprender"; el entorno productivo aporta el "cómo se transforma ese conocimiento en valor real".</p></div>
+      <div class="card feat reveal"><div class="ic" style="background:#E3F0FA"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3a86c4" stroke-width="2.2" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg></div><h3>Situado en el territorio</h3><p>Cada propuesta responde a la identidad productiva de su región: del software y la metalmecánica a la minería y la agroindustria.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section class="sec alt" id="como-funciona">
+  <div class="wrap">
+    <div class="kicker">Cómo funciona</div>
+    <h2 class="sec-title">Alternancia escuela – empresa</h2>
+    <p class="lead">El estudiante de 7° año alterna períodos de formación en el aula con períodos de aprendizaje en la empresa, durante un lapso no mayor a doce meses. En el aula se construyen las capacidades; en la planta se ponen en juego frente a tecnologías reales.</p>
+
+    <div class="alt-box reveal">
+      <div class="alt-head">
+        <h3>Un ejemplo de cronograma de alternancia</h3>
+        <div class="legend"><span><i style="background:var(--sky)"></i>Semana escuela</span><span><i style="background:var(--orange)"></i>Semana empresa</span></div>
+      </div>
+      <div class="weeks" id="weeks"></div>
+      <div class="alt-cap" id="altCap"></div>
+      <div class="alt-note"><b>📍 Cronograma acordado en cada territorio</b><p>Este es solo un ejemplo. Como el Plan Dual es territorializado, cada escuela y su empresa acuerdan el cronograma de alternancia según las capacidades del perfil profesional, la realidad productiva de la empresa y la organización de la institución.</p></div>
+    </div>
+
+    <div class="roles">
+      <div class="card role reveal"><div class="ic" style="background:#E3F0FA;width:46px;height:46px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1B2E5E" stroke-width="2.2" stroke-linecap="round"><path d="M2 3h20v14H2zM8 21h8M12 17v4"/></svg></div><h4>Docentes de aula</h4><p>Integran los aprendizajes de la empresa en sus contenidos y aseguran la coherencia curricular.</p></div>
+      <div class="card role reveal"><div class="ic" style="background:#E6F3E5;width:46px;height:46px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#52A14D" stroke-width="2.2" stroke-linecap="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg></div><h4>Docente de FAT y MEP</h4><p>Coordinan la articulación técnico-pedagógica con el instructor de la empresa. Un tutor por especialidad.</p></div>
+      <div class="card role reveal"><div class="ic" style="background:#FBEBDF;width:46px;height:46px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C55A11" stroke-width="2.2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div><h4>Instructor de la empresa</h4><p>Guía las tareas en planta, garantiza la seguridad y participa del diseño y la evaluación de las actividades.</p></div>
+      <div class="card role reveal"><div class="ic" style="background:#F1EAF8;width:46px;height:46px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6E4FA3" stroke-width="2.2" stroke-linecap="round"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg></div><h4>Directivos y supervisores</h4><p>Monitorean la implementación, evalúan resultados y reportan avances al Ministerio.</p></div>
+    </div>
+
+    <h3 style="font-size:24px;margin:56px 0 16px">El Plan Dual dentro de las Prácticas Profesionalizantes</h3>
+    <div class="tbl reveal">
+      <table>
+        <thead><tr><th>MODELO</th><th>ORGANIZACIÓN PEDAGÓGICA</th><th>ORGANIZACIÓN OPERATIVA</th><th>CARACTERÍSTICAS CLAVE</th></tr></thead>
+        <tbody>
+          <tr><td><b>Sistema de Alternancia</b></td><td>Integra investigación, práctica profesional y proyectos tecnológicos; aprendizaje autónomo y situado.</td><td>Coordinado por la escuela; actividades en empresa, emprendimiento, comunidad u organización.</td><td>Resolución de problemas reales en diversos entornos formativos.</td></tr>
+          <tr><td><b>Pasantías</b></td><td>Aplicación práctica de conocimientos técnicos específicos.</td><td>Obligatorias (aprox. 200 horas); inmersión socio-laboral en un tiempo acotado; seguimiento del docente de FAT.</td><td>Primera aproximación al mundo del trabajo.</td></tr>
+          <tr class="hl"><td><b>Plan de Formación Dual</b></td><td>Aplicación sistemática de conocimientos; integración del aprendizaje escolar y profesional; evaluación conjunta.</td><td>Alternancia escuela – empresa; coordinación entre docentes, MEP e instructores de la empresa; 7° año.</td><td>Combina formación escolar y laboral de manera estructurada; fortalece el desarrollo territorial.</td></tr>
+          <tr><td><b>Otros formatos</b></td><td colspan="3">Proyectos productivos, tecnológicos y otros formatos de práctica profesionalizante.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ESCUELAS Y EMPRESAS -->
+<section class="sec" id="escuelas-empresas">
+  <div class="wrap">
+    <div class="kicker">Para quién</div>
+    <h2 class="sec-title">Una alianza que suma a todos</h2>
+    <p class="lead">El Plan Dual se construye en corresponsabilidad entre escuela, empresa y Ministerio. Conocé qué aporta y qué implica para cada parte.</p>
+    <div class="tabs" role="tablist">
+      <button class="on" data-pane="escuelas">🏫 Escuelas técnicas</button>
+      <button data-pane="empresas">🏭 Empresas y organizaciones</button>
+      <button data-pane="estudiantes">🎓 Estudiantes y familias</button>
+    </div>
+
+    <div class="tabpane on" id="pane-escuelas">
+      <ul class="checks">
+        <li><span class="tick">✓</span><div><b>Formación en entornos reales</b><span>Los estudiantes desarrollan las capacidades del perfil profesional con tecnología que solo posee el sector productivo.</span></div></li>
+        <li><span class="tick">✓</span><div><b>Acredita las prácticas obligatorias</b><span>El Plan puede acreditar las pasantías del trayecto formativo y se reconoce en el analítico final.</span></div></li>
+        <li><span class="tick">✓</span><div><b>Acompañamiento de la Dirección General</b><span>Asistencia técnico-pedagógica para planificar la alternancia, el seguimiento y la evaluación.</span></div></li>
+        <li><span class="tick">✓</span><div><b>Proyecto institucional</b><span>Se incorpora al PEI y al PCI: reorganiza tiempos, define tutores por especialidad y fortalece el vínculo con el territorio.</span></div></li>
+        <li><span class="tick">✓</span><div><b>Requisito clave: un vínculo previo</b><span>La convocatoria está orientada a escuelas con un camino recorrido junto a empresas de su entorno. La Dirección acompaña y fortalece ese vínculo.</span></div></li>
+        <li><span class="tick">✓</span><div><b>Evaluación con rúbricas y portafolio dual</b><span>Registros de desempeño, reflexión sobre la práctica y evaluación conjunta con la empresa.</span></div></li>
+      </ul>
+    </div>
+
+    <div class="tabpane" id="pane-empresas">
+      <ul class="checks">
+        <li><span class="tick">✓</span><div><b>Talento formado a la medida</b><span>Formación alineada con las demandas reales del sector, con jóvenes que conocen sus procesos desde adentro.</span></div></li>
+        <li><span class="tick">✓</span><div><b>Sin relación laboral</b><span>La práctica es voluntaria y gratuita; no genera relación de dependencia.</span></div></li>
+        <li><span class="tick">✓</span><div><b>Un instructor de referencia</b><span>La empresa designa a una persona de su equipo para orientar a los estudiantes y participar de la evaluación junto al tutor de la escuela.</span></div></li>
+        <li><span class="tick">✓</span><div><b>Seguridad e higiene</b><span>Las actividades se desarrollan cumpliendo las normas de seguridad e higiene del trabajo. Los estudiantes cuentan con seguro de accidentes personales y pueden incluirse en la ART de la empresa.</span></div></li>
+        <li><span class="tick">✓</span><div><b>Confidencialidad garantizada</b><span>Los estudiantes se comprometen a no divulgar información confidencial de la empresa.</span></div></li>
+        <li><span class="tick">✓</span><div><b>Certificación conjunta</b><span>Al finalizar, escuela y empresa extienden un certificado con las funciones y actividades realizadas.</span></div></li>
+      </ul>
+      <div class="legal-cta" style="margin-top:22px">
+        <div><b style="font-size:18px">¿Querés ver cómo es el convenio?</b><p>Leé el modelo de Convenio Marco de Cooperación y Vinculación. Es un modelo de referencia: cada convenio se completa y se formaliza junto a la escuela y el Ministerio.</p></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-or" href="convenio.html">Ver modelo de convenio</a><a class="btn btn-ln" href="assets/Modelo_Convenio_Marco_Plan_Dual.docx" download>⬇ Descargar en Word</a></div>
+      </div>
+    </div>
+
+    <div class="tabpane" id="pane-estudiantes">
+      <ul class="checks">
+        <li><span class="tick">✓</span><div><b>Aprender haciendo</b><span>Ciclos de formación en el aula que se alternan con aprendizaje intensivo en la planta.</span></div></li>
+        <li><span class="tick">✓</span><div><b>Mejor empleabilidad</b><span>Experiencia real antes de egresar y un puente hacia el trabajo y los estudios superiores.</span></div></li>
+        <li><span class="tick">✓</span><div><b>Reconocimiento formal</b><span>La participación se reconoce en el analítico final y con un certificado escuela–empresa.</span></div></li>
+        <li><span class="tick">✓</span><div><b>Cuidados garantizados</b><span>Tutor docente, instructor en la empresa, seguro y autorización de las familias para menores de 18 años.</span></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- NORMATIVA -->
+<section class="sec alt" id="normativa">
+  <div class="wrap">
+    <div class="kicker">Marco normativo</div>
+    <h2 class="sec-title">Dónde está regulado</h2>
+    <p class="lead">El Plan de Formación Dual se enmarca en la normativa educativa nacional y provincial, que orienta la vinculación de las escuelas técnicas con el mundo del trabajo.</p>
+    <div class="norms">
+      <div class="card norm reveal"><b>Resolución Ministerial N° 28/2026</b><span>Marco provincial del Plan de Formación Dual.</span></div>
+      <div class="card norm reveal"><b>Ley de Educación Nacional N° 26.206</b><span>Arts. 30 inc. "g" y 33: vinculación de la escuela con el mundo del trabajo.</span></div>
+            <div class="card norm reveal"><b>Ley Provincial N° 10.576</b><span>Normativa provincial citada en los convenios de vinculación.</span></div>
+      <div class="card norm reveal"><b>Plan de Desarrollo Educativo Provincial 2024–2027</b><span>Eje estratégico del Modelo de Educación Dual.</span></div>
+      <div class="card norm reveal"><b>Resolución N° 420/2011</b><span>Pasantías educativas y condiciones de las prácticas profesionalizantes en empresas.</span></div>
+      <div class="card norm reveal"><b>Resolución Ministerial N° 565/11</b><span>Perfiles profesionales y propuesta curricular de la Educación Técnica.</span></div>
+                </div>
+    <div class="legal-cta reveal">
+      <div><b style="font-size:18px">⚖️ Asesoramiento legal de la Dirección General</b><p>Escuelas y empresas cuentan con el acompañamiento del área legal de la DGETyFP para resolver dudas sobre convenios, seguros y responsabilidades.</p></div>
+      <a class="btn btn-or" href="#contacto" data-legal="1">Solicitar asesoramiento</a>
+    </div>
+  </div>
+</section>
+
+<!-- POSTULACIÓN -->
+<section class="sec" id="postulacion">
+  <div class="wrap">
+    <div class="kicker">Convocatoria</div>
+    <div class="closed" id="estadoPost">● Postulaciones Ciclo <span data-cfg="ciclo">2027</span> cerradas</div>
+    <h2 class="sec-title">Postulación y propuesta de implementación</h2>
+    <p class="lead"><span id="leadPost">La convocatoria para el Ciclo 2027 ya cerró. Te contamos qué se requirió, para que tu escuela pueda prepararse para las próximas convocatorias.</span> El Plan Dual requiere un acompañamiento pedagógico intensivo. Por eso la convocatoria busca instituciones con experiencia en la vinculación con su entorno productivo. La propuesta debe reflejar un trabajo consensuado entre el equipo directivo, los docentes de 7° año y las empresas aliadas.</p>
+    <div class="steps">
+      <div class="card step reveal"><h3>Informe Técnico</h3><ul><li>Mapeo de capacidades profesionales del perfil y cómo se garantiza cada una.</li><li>Propuesta para desarrollar y acreditar las capacidades no cubiertas.</li><li>Cronograma de alternancia (semana escuela / semana empresa).</li></ul></div>
+      <div class="card step reveal"><h3>Proyecto de Práctica Profesionalizante 2026</h3><ul><li>Presentado al cierre del ciclo lectivo anterior.</li><li>Acredita la trazabilidad del vínculo con la empresa y los antecedentes de articulación.</li></ul></div>
+      <div class="card step reveal"><h3>PEI 2026 actualizado</h3><ul><li>Incorpora explícitamente el Modelo Dual.</li><li>Ajustes organizativos y reorganización de tiempos institucionales.</li><li>Estrategias de seguimiento docente.</li></ul></div>
+      <div class="card step reveal"><h3>Nota de Compromiso Empresarial</h3><ul><li>Firmada por el representante legal de la empresa.</li><li>Acepta la corresponsabilidad formativa y designa un tutor o referente técnico.</li><li>Incluye los datos de contacto del referente.</li></ul></div>
+    </div>
+    <div class="notice reveal">
+      <div>
+        <b>📁 Cómo se presenta la documentación</b>
+        <p>Todos los archivos, identificados y ordenados, en <b>una única carpeta de Google Drive</b> compartida en modo <b>"comentar"</b>, con el enlace consignado en el formulario de la convocatoria. Para conocer las próximas convocatorias, dejanos tu consulta y te avisamos.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <a class="btn btn-or" id="formLink" href="#" rel="noopener">Formulario de inscripción</a>
+        <a class="btn btn-nv" href="#contacto">Envianos tu consulta</a>
+      </div>
+    </div>
+    <div class="aviso" id="avisoCerrado" role="status" hidden>
+      <div class="aviso-ic" aria-hidden="true">!</div>
+      <div><b>Convocatoria cerrada</b><p id="avisoTxt">La convocatoria del Ciclo 2027 se encuentra cerrada. Escribinos y te avisamos cuando se abra la próxima.</p></div>
+      <a class="btn btn-or" href="#contacto">Envianos tu consulta</a>
+      <button class="aviso-x" type="button" id="avisoX" aria-label="Cerrar aviso">×</button>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCIAS -->
+<section class="sec" id="experiencias">
+  <div class="wrap">
+    <div class="kicker">Experiencias</div>
+    <h2 class="sec-title">Empezamos con 2 escuelas. Hoy somos <span data-cfg="escuelas">16</span>.</h2>
+    <p class="lead">El Plan Dual comenzó como una prueba piloto en dos escuelas: el IPET 430 junto a Prodismo y el IPEMyT 310 junto a Porta Hnos. La respuesta de escuelas y empresas hizo que la red creciera hasta alcanzar <span data-cfg="escuelas">16</span> instituciones en distintos puntos de la provincia.</p>
+    <div class="tl reveal">
+      <div class="p"><div class="dot">2</div><b>Piloto</b><small>IPET 430 · IPEMyT 310</small></div>
+      <div class="p"><div class="dot">7</div><b>Abril</b><small>San Francisco, Las Varas y Devoto</small></div>
+      <div class="p"><div class="dot">+1</div><b>Mayo</b><small>Industria de la madera</small></div>
+      <div class="p"><div class="dot">10</div><b>Junio</b><small>Construcción en seco</small></div>
+      <div class="p"><div class="dot">+1</div><b>Julio</b><small>Noroeste minero</small></div>
+      <div class="p"><div class="dot">+1</div><b>Agosto</b><small>Electricidad autopartista</small></div>
+      <div class="p hoy"><div class="dot" data-cfg="escuelas">16</div><b>Hoy</b><small><span data-cfg="escuelas">16</span> escuelas · <span data-cfg="empresas">45</span> empresas</small></div>
+    </div>
+    <div class="exps"><article class="card exp reveal"><div class="ph" style="background-image:url(assets/exp_prodismo.jpg)" role="img" aria-label="IPET 430 ITI + Prodismo S.R.L."></div><div class="bd"><div class="dt">ABRIL 2026</div><h3>IPET 430 ITI + Prodismo S.R.L.</h3><p>Lanzamiento de la prueba piloto: los estudiantes de 7° año recibieron su bienvenida y sus uniformes de trabajo para formarse en la escuela y en la empresa.</p><div class="tags"><span>Prueba piloto</span><span>7° año</span><span>Autopartista</span></div></div></article><article class="card exp reveal"><div class="ph" style="background-image:url(assets/exp_sanfrancisco.jpg)" role="img" aria-label="San Francisco, Las Varas y Devoto"></div><div class="bd"><div class="dt">ABRIL 2026</div><h3>San Francisco, Las Varas y Devoto</h3><p>Se firmaron convenios entre 5 escuelas técnicas y 25 empresas locales, consolidando a San Francisco como polo estratégico del Plan.</p><div class="tags"><span>5 escuelas</span><span>25 empresas</span><span>Este provincial</span></div></div></article><article class="card exp reveal"><div class="ph" style="background-image:url(assets/exp_porta.jpg)" role="img" aria-label="IPEMyT 310 "Puerto Argentino" + Porta Hnos."></div><div class="bd"><div class="dt">ABRIL 2026</div><h3>IPEMyT 310 "Puerto Argentino" + Porta Hnos.</h3><p>Una alianza construida sobre un vínculo de más de 15 años: 19 estudiantes se forman con docentes y equipos de Porta.</p><div class="tags"><span>Prueba piloto</span><span>19 estudiantes</span></div></div></article><article class="card exp reveal"><div class="ph" style="background-image:url(assets/exp_jcl.jpg)" role="img" aria-label="IPET 70 "Prof. Humberto Dionisi" + JCL S.A."></div><div class="bd"><div class="dt">MAYO 2026</div><h3>IPET 70 "Prof. Humberto Dionisi" + JCL S.A.</h3><p>El Plan llega a la industria de la madera: estudiantes de Fabricación Industrial de Productos en Madera y Muebles se forman en contextos reales.</p><div class="tags"><span>Madera y muebles</span><span>Acredita prácticas</span></div></div></article><article class="card exp reveal"><div class="ph" style="background-image:url(assets/exp_steelplex.jpg)" role="img" aria-label="IPEMyT 133 "Dr. Florencio Escardó" + Steelplex"></div><div class="bd"><div class="dt">JUNIO 2026</div><h3>IPEMyT 133 "Dr. Florencio Escardó" + Steelplex</h3><p>Décima institución del Plan: estudiantes de Maestro Mayor de Obras aprenden construcción en seco y steel frame.</p><div class="tags"><span>10ª institución</span><span>Construcción</span></div></div></article><article class="card exp reveal"><div class="ph" style="background-image:url(assets/exp_quilpo.jpg)" role="img" aria-label="IPET 110 "Manuel Hidalgo" · Canteras Quilpo"></div><div class="bd"><div class="dt">JULIO 2026</div><h3>IPET 110 "Manuel Hidalgo" · Canteras Quilpo</h3><p>El Plan llega al noroeste cordobés junto a la Municipalidad de San Marcos Sierras y la Comuna de Las Cañadas, con identidad minera y la mina escuela "La Quilpeñita".</p><div class="tags"><span>Minería</span><span>Noroeste</span></div></div></article><article class="card exp wide reveal"><div class="ph" style="background-image:url(assets/exp_fumiscor.jpg)" role="img" aria-label="IPEMyT 149 "Alejandro Carbó" + Fumiscor"></div><div class="bd"><div class="dt">AGOSTO 2026</div><h3>IPEMyT 149 "Alejandro Carbó" + Fumiscor</h3><p>23 estudiantes de Electricidad se forman en la industria autopartista y metalúrgica. Además se presentó el Laboratorio de Talentos.</p><div class="tags"><span>23 estudiantes</span><span>Electricidad</span><span>Autopartista</span></div></div></article></div>
+  </div>
+</section>
+
+<!-- RED DUAL -->
+<section class="sec alt" id="red">
+  <div class="wrap">
+    <div class="kicker">La red en acción</div>
+    <h2 class="sec-title">Una red que crece en todo el territorio</h2>
+    <p class="lead">Grandes industrias, PyMEs regionales, cámaras y cooperativas, desde Córdoba Capital hasta Canteras Quilpo, Villa Reducción o James Craik. San Francisco se consolida como polo estratégico del Plan.</p>
+    <div class="logos reveal"><span>WEG</span><span>AXION</span><span>Aguas Cordobesas</span><span>Porta Hnos.</span><span>Prodismo</span><span>Manfrey</span><span>Mainero</span><span>FUMISCOR</span><span>Cámaras empresarias</span><span>Cooperativas agropecuarias</span></div>
+    <div class="proy reveal">
+      <div class="kicker" style="color:var(--orange2)">Proyección 2027</div>
+      <h3 style="font-size:26px">La red sigue creciendo</h3>
+      <p>Ya se registran postulaciones tempranas de Arroyito, Anisacate y Villa del Rosario, y empresas y cámaras como Volkswagen, Maxion Montich, Fepuc y CIEC manifestaron su compromiso para el próximo ciclo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="preguntas">
+  <div class="wrap" style="max-width:900px">
+    <div class="kicker">Preguntas frecuentes</div>
+    <h2 class="sec-title" style="margin-bottom:28px">Lo que más nos consultan</h2>
+    <div class="faq">
+      <details><summary>¿La Dirección General asigna una empresa a cada escuela?</summary><p>No. La escuela se postula junto a empresas con las que ya tiene un vínculo (por ejemplo, a través de pasantías o proyectos). La Dirección General acompaña, fortalece y formaliza ese vínculo, y puede orientar sobre nuevas oportunidades de articulación.</p></details>
+      <details><summary>¿En qué año se implementa?</summary><p>En 7° año de la Educación Secundaria Técnica, mediante alternancia entre escuela y empresa durante un período no mayor a doce meses.</p></details>
+      <details><summary>¿Es lo mismo que una pasantía?</summary><p>No. El Plan Dual integra formalmente los contenidos curriculares con las actividades en la empresa, con docentes e instructores coordinados bajo un plan común y evaluación conjunta. Puede acreditar las pasantías obligatorias del trayecto formativo.</p></details>
+      <details><summary>¿La empresa tiene que contratar o pagar a los estudiantes?</summary><p>No. La práctica es voluntaria y gratuita y no genera relación laboral. La empresa puede, si lo desea, ofrecer beneficios como transporte, comedor o viáticos, acordados en los convenios específicos.</p></details>
+      <details><summary>¿Quién cubre los seguros?</summary><p>La institución educativa y la organización asumen la contratación de seguros de accidentes personales. La empresa puede incluir a los estudiantes en la cobertura de su ART.</p></details>
+      <details><summary>¿Qué se firma para participar?</summary><p>Un Convenio Marco entre el Ministerio, la organización y la escuela, y luego convenios específicos de implementación. Podés <a href="convenio.html">ver el modelo de convenio</a> o descargarlo desde la sección para empresas.</p></details>
+      <details><summary>¿Cómo se evalúa a los estudiantes?</summary><p>Con rúbricas de seguimiento (articulación curricular, capacidades técnicas y transversales, coordinación, seguridad e higiene e impacto formativo) y un portafolio dual. La participación se reconoce en el analítico final.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="sec alt" id="contacto">
+  <div class="wrap">
+    <div class="contact">
+      <div class="contact-info reveal">
+        <div class="kicker" style="color:var(--orange2)">Contacto</div>
+        <h2 class="sec-title" style="color:#fff">¿Tenés una consulta?</h2>
+        <p>Escribinos y el equipo del Plan Dual de la Dirección General de Educación Técnica y Formación Profesional se va a comunicar con vos.</p>
+        <ul>
+          <li>Escuelas que quieren sumarse en próximas convocatorias.</li>
+          <li>Empresas, cámaras y municipios interesados en ser co-formadores.</li>
+          <li>Consultas sobre convenios, seguros y aspectos legales.</li>
+        </ul>
+      </div>
+      <form class="card reveal" id="form" novalidate>
+        <div class="f" style="margin-bottom:16px"><label>SOY…</label>
+          <div class="perfil">
+            <label><input type="radio" name="perfil" value="Escuela" checked><span>Escuela</span></label>
+            <label><input type="radio" name="perfil" value="Empresa"><span>Empresa</span></label>
+            <label><input type="radio" name="perfil" value="Cámara / Municipio"><span>Cámara / Municipio</span></label>
+            <label><input type="radio" name="perfil" value="Estudiante / Familia"><span>Estudiante / Familia</span></label>
+            <label><input type="radio" name="perfil" value="Otro"><span>Otro</span></label>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="f"><label for="nombre">NOMBRE Y APELLIDO *</label><input id="nombre" name="nombre" required autocomplete="name"></div>
+          <div class="f"><label for="cargo">CARGO / ROL</label><input id="cargo" name="cargo" placeholder="Ej.: Director/a, RR. HH."></div>
+        </div>
+        <div class="frow">
+          <div class="f"><label for="institucion" id="instLbl">ESCUELA (NOMBRE Y N°) *</label><input id="institucion" name="institucion" required></div>
+          <div class="f"><label for="localidad">LOCALIDAD *</label><input id="localidad" name="localidad" required></div>
+        </div>
+        <div class="frow">
+          <div class="f"><label for="email">EMAIL *</label><input id="email" name="email" type="email" required autocomplete="email"></div>
+          <div class="f"><label for="telefono">TELÉFONO</label><input id="telefono" name="telefono" type="tel" autocomplete="tel"></div>
+        </div>
+        <div class="f" style="margin-bottom:12px"><label for="mensaje">CONSULTA *</label><textarea id="mensaje" name="mensaje" rows="5" required></textarea></div>
+        <label class="chk"><input type="checkbox" name="legal" id="legal" value="Sí"> Quiero recibir asesoramiento legal sobre convenios.</label>
+        <label class="chk"><input type="checkbox" id="acepto" required> Acepto que mis datos se usen solo para responder esta consulta.</label>
+        <input class="hp" type="text" name="web" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn btn-or" type="submit" id="send" style="width:100%;justify-content:center">Enviar consulta</button>
+        <div class="msg" id="msg" role="status"></div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><b>Ministerio de Educación de la Provincia de Córdoba</b><br>Dirección General de Educación Técnica y Formación Profesional</div>
+    <div>Plan Dual a la Cordobesa · Práctico · Territorial · Formador<br><a href="admin.html" style="color:inherit;opacity:.55;font-size:12px">Acceso equipo</a></div>
+  </div>
+</footer>
+
+<script>
+/* ============ CONFIGURACIÓN (editar acá) ============ */
+var CONFIG = {
+  // URL de la aplicación web de Apps Script que recibe las consultas
+  SCRIPT_URL: "https://script.google.com/macros/s/AKfycbzwhm07qUwOZxGo4WNf0IUJQneRpzdFfG7957imHqOu21Wfz9RJZaYSUv-8WNcJELODnA/exec",
+  // ID del video de Google Drive (debe estar compartido como "Cualquier persona con el enlace")
+  VIDEO_ID: "1NQ8WJtIdHpZTMhll0fRoNZrbRM16M4xl",
+  // Valores por defecto. Los valores reales se editan en admin.html
+  // o en la pestaña "Configuracion" de la planilla Plan Dual.
+  SITIO: {
+    postulaciones_abiertas: "NO", ciclo: "2027",
+    url_formulario: "https://ephemeral-crostata-f6ea7c.netlify.app/", fecha_cierre: "",
+    mensaje_cerrado: "La convocatoria del Ciclo 2027 se encuentra cerrada. Escribinos y te avisamos cuando se abra la próxima.",
+    escuelas: "16", empresas: "45", estudiantes: "252", localidades: "8", especialidades: "10"
+  }
+};
+
+/* Video */
+document.getElementById('videoBox').innerHTML =
+  '<iframe src="https://drive.google.com/file/d/' + CONFIG.VIDEO_ID + '/preview" allow="autoplay; fullscreen" allowfullscreen title="Video Plan Dual a la Cordobesa" loading="lazy"></iframe>';
+
+/* Configuración editable (postulaciones y cifras) */
+function aplicarConfig(c){
+  CONFIG.SITIO = c;
+  document.querySelectorAll('[data-cfg]').forEach(function(el){ var v=c[el.dataset.cfg]; if(v!=null && v!=='') el.textContent=v; });
+  document.querySelectorAll('[data-cfgn]').forEach(function(el){ var v=parseInt(c[el.dataset.cfgn],10); if(!isNaN(v)){ el.dataset.count=v; if(el.dataset.done) el.textContent=v; } });
+  var abierta = /^s/i.test(c.postulaciones_abiertas||''), ciclo=c.ciclo||'';
+  var est=document.getElementById('estadoPost'), link=document.getElementById('formLink');
+  est.className = 'closed' + (abierta ? ' open' : '');
+  est.textContent = '● Postulaciones Ciclo ' + ciclo + (abierta ? ' abiertas' + (c.fecha_cierre ? ' hasta el ' + c.fecha_cierre : '') : ' cerradas');
+  document.getElementById('leadPost').textContent = abierta
+    ? 'La convocatoria para el Ciclo ' + ciclo + ' está abierta' + (c.fecha_cierre ? ' hasta el ' + c.fecha_cierre : '') + '. Revisá los requisitos y completá el formulario de inscripción.'
+    : 'La convocatoria para el Ciclo ' + ciclo + ' ya cerró. Te contamos qué se requirió, para que tu escuela pueda prepararse para las próximas convocatorias.';
+  document.getElementById('avisoTxt').textContent = c.mensaje_cerrado || ('La convocatoria del Ciclo ' + ciclo + ' se encuentra cerrada.');
+  if (abierta) { link.href = c.url_formulario || '#'; link.target = '_blank'; document.getElementById('avisoCerrado').hidden = true; }
+  else { link.href = '#postulacion'; link.removeAttribute('target'); }
+  link.dataset.abierta = abierta ? '1' : '';
+}
+document.getElementById('formLink').addEventListener('click', function(e){
+  if (this.dataset.abierta) return;
+  e.preventDefault(); var a=document.getElementById('avisoCerrado'); a.hidden=false; a.scrollIntoView({behavior:'smooth',block:'center'});
+});
+document.getElementById('avisoX').onclick = function(){ document.getElementById('avisoCerrado').hidden = true; };
+aplicarConfig(CONFIG.SITIO);
+fetch(CONFIG.SCRIPT_URL + '?accion=config').then(function(r){ return r.json(); })
+  .then(function(j){ if (j && j.ok && j.config) aplicarConfig(j.config); }).catch(function(){});
+
+
+/* Menú móvil */
+document.getElementById('menuBtn').onclick = function(){ document.getElementById('links').classList.toggle('open'); };
+document.querySelectorAll('#links a').forEach(function(a){ a.addEventListener('click', function(){ document.getElementById('links').classList.remove('open'); }); });
+
+/* Aparición al hacer scroll + contadores */
+var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+var co = new IntersectionObserver(function(es){ es.forEach(function(e){
+  if(!e.isIntersecting) return; var el=e.target, to=+el.dataset.count, t0=null;
+  function st(t){ if(!t0)t0=t; to=+el.dataset.count; var p=Math.min(1,(t-t0)/1400); el.textContent=Math.round(to*(1-Math.pow(1-p,3))); if(p<1) requestAnimationFrame(st); else el.dataset.done='1'; }
+  requestAnimationFrame(st); co.unobserve(el); }); }, {threshold:.5});
+document.querySelectorAll('[data-count]').forEach(function(el){ co.observe(el); });
+
+/* Alternancia animada */
+(function(){
+  var plan=['esc','emp','esc','emp','esc','emp','esc','emp'];
+  var cap={esc:'Semana en la escuela: fundamentos científicos y técnicos, planificación con el docente de FAT y MEP.',
+           emp:'Semana en la empresa: aprendizaje en planta junto al instructor, con tecnología real y normas de seguridad.'};
+  var icEsc='<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>';
+  var icEmp='<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M2 20h20M4 20V9l5 3V9l5 3V5h6v15"/></svg>';
+  var box=document.getElementById('weeks');
+  box.innerHTML=plan.map(function(p,i){ return '<div class="wk '+p+'">'+(p==='esc'?icEsc:icEmp)+'Semana '+(i+1)+'<br><span style="font-weight:700;font-size:11.5px">'+(p==='esc'?'Escuela':'Empresa')+'</span></div>'; }).join('');
+  var wks=box.children, i=0;
+  function tick(){ for(var k=0;k<wks.length;k++) wks[k].classList.toggle('on',k<=i); document.getElementById('altCap').textContent=cap[plan[i]]; i++; if(i<plan.length){ setTimeout(tick,1300); } else { setTimeout(function(){ i=0; tick(); },2600); } }
+  tick();
+})();
+
+/* Pestañas */
+function showPane(name){
+  document.querySelectorAll('.tabs button').forEach(function(b){ b.classList.toggle('on',b.dataset.pane===name); });
+  document.querySelectorAll('.tabpane').forEach(function(p){ p.classList.toggle('on',p.id==='pane-'+name); });
+}
+document.querySelectorAll('.tabs button').forEach(function(b){ b.onclick=function(){ showPane(b.dataset.pane); }; });
+document.querySelectorAll('[data-tab]').forEach(function(a){ a.addEventListener('click',function(){ showPane(a.dataset.tab); }); });
+document.querySelectorAll('[data-legal]').forEach(function(a){ a.addEventListener('click',function(){ document.getElementById('legal').checked=true; }); });
+
+/* Formulario de contacto */
+var form=document.getElementById('form'), msg=document.getElementById('msg'), btn=document.getElementById('send');
+form.querySelectorAll('input[name=perfil]').forEach(function(r){ r.addEventListener('change',function(){
+  var v=form.perfil.value;
+  document.getElementById('instLbl').textContent = v==='Escuela' ? 'ESCUELA (NOMBRE Y N°) *' : v==='Empresa' ? 'EMPRESA / RAZÓN SOCIAL *' : v==='Estudiante / Familia' ? 'ESCUELA A LA QUE ASISTE *' : 'INSTITUCIÓN / ORGANIZACIÓN *';
+}); });
+form.addEventListener('submit',function(e){
+  e.preventDefault(); msg.className='msg';
+  var req=['nombre','institucion','localidad','email','mensaje'];
+  for(var k=0;k<req.length;k++){ var el=form[req[k]]; if(!el.value.trim()){ el.focus(); msg.textContent='Completá los campos obligatorios (*).'; msg.className='msg err'; return; } }
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email.value)){ form.email.focus(); msg.textContent='Revisá el email ingresado.'; msg.className='msg err'; return; }
+  if(!document.getElementById('acepto').checked){ msg.textContent='Necesitamos tu conformidad para usar los datos.'; msg.className='msg err'; return; }
+  if(form.web.value){ return; } // anti-spam
+  var data=new URLSearchParams(new FormData(form));
+  data.set('legal', document.getElementById('legal').checked ? 'Sí' : 'No');
+  data.set('origen', location.href);
+  data.set('fuente', 'web-plandual');
+  btn.disabled=true; btn.textContent='Enviando…';
+  fetch(CONFIG.SCRIPT_URL,{method:'POST',mode:'no-cors',body:data})
+    .then(function(){ form.reset(); msg.textContent='¡Gracias! Recibimos tu consulta. El equipo del Plan Dual se va a comunicar con vos a la brevedad.'; msg.className='msg ok'; })
+    .catch(function(){ msg.textContent='No pudimos enviar la consulta. Revisá tu conexión e intentá de nuevo.'; msg.className='msg err'; })
+    .then(function(){ btn.disabled=false; btn.textContent='Enviar consulta'; });
+});
+</script>
+</body>
+</html>

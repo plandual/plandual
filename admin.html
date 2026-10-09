@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Administración · Plan Dual · DGETyFP</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='19' fill='%231B2E5E'/%3E%3Ccircle cx='20' cy='20' r='7' fill='%23C55A11'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1B2E5E;--orange:#C55A11;--green:#52A14D;--muted:#5A6685;--light:#F4F6FA;--line:#E3E8F2;--red:#C8102E}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;font-family:Lato,Calibri,Arial,sans-serif;color:var(--navy);background:var(--light);line-height:1.5}
+.band{height:46px;background:var(--green) url(assets/band.png) right center/auto 100% no-repeat}
+header{background:var(--navy);color:#fff}
+header .w{max-width:860px;margin:0 auto;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+header b{font-family:Lora,Georgia,serif;font-size:20px}
+header a{color:#C9D4EE;font-size:14px}
+main{max-width:860px;margin:28px auto 60px;padding:0 16px;display:grid;gap:20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 30px rgba(27,46,94,.08);padding:24px}
+h2{font-family:Lora,Georgia,serif;font-size:21px;margin:0 0 4px}
+.hint{color:var(--muted);font-size:14px;margin:0 0 18px}
+label{display:block;font-size:12px;letter-spacing:1.5px;font-weight:900;color:var(--muted);margin-bottom:6px;text-transform:uppercase}
+input,textarea{width:100%;font:inherit;color:inherit;border:1.5px solid var(--line);border-radius:10px;padding:11px 13px;background:#fff}
+input:focus,textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(27,46,94,.12)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.nums{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.nums input{text-align:center;font-size:22px;font-weight:900;font-variant-numeric:tabular-nums}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#fff;border:0;border-radius:12px;padding:13px 22px;font:900 15px Lato,sans-serif;cursor:pointer;text-decoration:none}
+.btn:disabled{opacity:.6;cursor:wait}
+.btn.nv{background:var(--navy)}
+.btn.ln{background:#fff;color:var(--navy);border:1.5px solid var(--line)}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.msg{font-weight:700;font-size:14px}
+.msg.ok{color:#2f6b2c}.msg.err{color:var(--red)}
+.switch{display:flex;gap:8px;background:var(--light);border-radius:14px;padding:6px;width:max-content;max-width:100%}
+.switch button{border:0;border-radius:10px;padding:12px 20px;font:900 15px Lato,sans-serif;cursor:pointer;background:transparent;color:var(--muted)}
+.switch button.on.si{background:var(--green);color:#fff}
+.switch button.on.no{background:var(--red);color:#fff}
+.stat{display:flex;gap:14px;align-items:center;background:var(--light);border-radius:12px;padding:14px 16px}
+.stat b{font-size:28px;font-variant-numeric:tabular-nums}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.nums{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<div class="band" aria-hidden="true"></div>
+<header><div class="w"><b>Plan Dual · Administración</b><a href="index.html">← Ver el sitio</a></div></header>
+
+<main>
+  <!-- Ingreso -->
+  <section class="card" id="login">
+    <h2>Ingresar</h2>
+    <p class="hint">Acceso exclusivo para el equipo técnico de la DGETyFP. Usuario: tu email de administradora.</p>
+    <form id="fLogin" class="grid">
+      <div><label for="usuario">Usuario (email)</label><input id="usuario" type="email" required autocomplete="username" placeholder="nombre@gmail.com"></div>
+      <div><label for="clave">Contraseña</label><input id="clave" type="password" required autocomplete="current-password"></div>
+      <div><button class="btn nv" id="bLogin">Entrar</button></div>
+    </form>
+    <p class="msg" id="mLogin"></p>
+  </section>
+
+  <!-- Panel -->
+  <div id="panel" hidden style="display:grid;gap:20px">
+    <section class="card">
+      <h2>Consultas recibidas</h2>
+      <p class="hint">Las consultas del formulario se guardan en la pestaña "Consultas" de la planilla Plan Dual y llegan por email al equipo técnico.</p>
+      <div class="row"><div class="stat"><b id="nCons">0</b><span>consultas registradas</span></div><a class="btn ln" id="lPlanilla" href="#" target="_blank" rel="noopener">Abrir la planilla →</a></div>
+    </section>
+
+    <form id="fCfg" style="display:grid;gap:20px">
+      <section class="card">
+        <h2>Convocatoria</h2>
+        <p class="hint">Cuando está cerrada, el botón "Formulario de inscripción" muestra el anuncio de convocatoria cerrada.</p>
+        <label>Estado de las postulaciones</label>
+        <div class="switch" role="group" aria-label="Estado de las postulaciones">
+          <button type="button" class="si" data-v="SI">● Abiertas</button>
+          <button type="button" class="no" data-v="NO">● Cerradas</button>
+        </div>
+        <div class="grid" style="margin-top:18px">
+          <div><label for="ciclo">Ciclo</label><input id="ciclo" name="ciclo" inputmode="numeric"></div>
+          <div><label for="fecha_cierre">Fecha de cierre (texto)</label><input id="fecha_cierre" name="fecha_cierre" placeholder="ej.: 30 de noviembre"></div>
+        </div>
+        <div style="margin-top:16px"><label for="url_formulario">Enlace del formulario de inscripción</label><input id="url_formulario" name="url_formulario" type="url"></div>
+        <div style="margin-top:16px"><label for="mensaje_cerrado">Anuncio de convocatoria cerrada</label><textarea id="mensaje_cerrado" name="mensaje_cerrado" rows="3"></textarea></div>
+      </section>
+
+      <section class="card">
+        <h2>Cifras del Plan</h2>
+        <p class="hint">Se actualizan en el inicio, en "Nuestro recorrido" y en Experiencias.</p>
+        <div class="nums">
+          <div><label for="escuelas">Escuelas</label><input id="escuelas" name="escuelas" type="number" min="0"></div>
+          <div><label for="empresas">Empresas</label><input id="empresas" name="empresas" type="number" min="0"></div>
+          <div><label for="estudiantes">Estudiantes</label><input id="estudiantes" name="estudiantes" type="number" min="0"></div>
+          <div><label for="localidades">Localidades</label><input id="localidades" name="localidades" type="number" min="0"></div>
+          <div><label for="especialidades">Especialid.</label><input id="especialidades" name="especialidades" type="number" min="0"></div>
+        </div>
+      </section>
+
+      <p class="hint" style="margin:0">Sesión iniciada como <b id="quien"></b></p>
+      <div class="row"><button class="btn" id="bGuardar">Guardar cambios</button><span class="msg" id="mGuardar"></span><button type="button" class="btn ln" id="bSalir" style="margin-left:auto">Salir</button></div>
+    </form>
+  </div>
+</main>
+
+<script>
+var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzwhm07qUwOZxGo4WNf0IUJQneRpzdFfG7957imHqOu21Wfz9RJZaYSUv-8WNcJELODnA/exec";
+var CAMPOS = ['ciclo','fecha_cierre','url_formulario','mensaje_cerrado','escuelas','empresas','estudiantes','localidades','especialidades'];
+var usuario = '', clave = '', estado = 'NO';
+function $(id){ return document.getElementById(id); }
+function llamar(datos){
+  var body = new URLSearchParams(datos); body.set('fuente','web-plandual'); body.set('usuario', usuario); body.set('clave', clave);
+  return fetch(SCRIPT_URL, { method:'POST', body: body }).then(function(r){ return r.json(); });
+}
+function pintarEstado(v){
+  estado = v;
+  document.querySelectorAll('.switch button').forEach(function(b){ b.classList.toggle('on', b.dataset.v === v); b.setAttribute('aria-pressed', b.dataset.v === v); });
+}
+function cargar(j){
+  CAMPOS.forEach(function(k){ $(k).value = j.config[k] || ''; });
+  pintarEstado(/^s/i.test(j.config.postulaciones_abiertas) ? 'SI' : 'NO');
+  if (j.planilla) $('lPlanilla').href = j.planilla;
+  if (j.consultas != null) $('nCons').textContent = j.consultas;
+  $('login').hidden = true; $('panel').hidden = false;
+}
+document.querySelectorAll('.switch button').forEach(function(b){ b.onclick = function(){ pintarEstado(b.dataset.v); }; });
+
+$('fLogin').onsubmit = function(e){
+  e.preventDefault(); usuario = $('usuario').value.trim().toLowerCase(); clave = $('clave').value; $('mLogin').className = 'msg'; $('mLogin').textContent = 'Verificando…'; $('bLogin').disabled = true;
+  llamar({ accion:'login' }).then(function(j){
+    if (!j.ok) throw new Error(j.error || 'No se pudo ingresar');
+    try { sessionStorage.setItem('pdAdmin', JSON.stringify([usuario, clave])); } catch(x){}
+    $('mLogin').textContent = ''; $('quien').textContent = usuario; cargar(j);
+  }).catch(function(err){ $('mLogin').className = 'msg err'; $('mLogin').textContent = err.message === 'Failed to fetch' ? 'No se pudo conectar con el script. Revisá que esté implementado para "Cualquier usuario".' : err.message; })
+    .then(function(){ $('bLogin').disabled = false; });
+};
+
+$('fCfg').onsubmit = function(e){
+  e.preventDefault(); var d = { accion:'guardar', postulaciones_abiertas: estado };
+  CAMPOS.forEach(function(k){ d[k] = $(k).value.trim(); });
+  $('bGuardar').disabled = true; $('mGuardar').className = 'msg'; $('mGuardar').textContent = 'Guardando…';
+  llamar(d).then(function(j){
+    if (!j.ok) throw new Error(j.error || 'No se pudo guardar');
+    cargar(j); $('mGuardar').className = 'msg ok'; $('mGuardar').textContent = '✓ Guardado. El sitio ya muestra los cambios.';
+  }).catch(function(err){ $('mGuardar').className = 'msg err'; $('mGuardar').textContent = err.message; })
+    .then(function(){ $('bGuardar').disabled = false; });
+};
+
+$('bSalir').onclick = function(){ try { sessionStorage.removeItem('pdAdmin'); } catch(x){} location.reload(); };
+
+try { var c = JSON.parse(sessionStorage.getItem('pdAdmin') || 'null'); if (c) { $('usuario').value = c[0]; $('clave').value = c[1]; $('fLogin').requestSubmit ? $('fLogin').requestSubmit() : $('fLogin').onsubmit(new Event('submit')); } } catch(x){}
+</script>
+</body>
+</html>
