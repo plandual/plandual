@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tablero del Relevamiento · Plan Dual · DGETyFP</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='19' fill='%231B2E5E'/%3E%3Ccircle cx='20' cy='20' r='7' fill='%23C55A11'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1B2E5E;--orange:#C55A11;--orange2:#E07B39;--green:#52A14D;--sky:#69ACDF;--muted:#5A6685;--pale:#C9D4EE;--light:#F4F6FA;--line:#E3E8F2;--red:#C8102E;--gris:#B9C2D6}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;font-family:Lato,Calibri,Arial,sans-serif;color:var(--navy);background:var(--light);line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Lora,Georgia,serif;margin:0;line-height:1.2;text-wrap:balance}
+.band{height:46px;background:var(--green) url(assets/band.png) right center/auto 100% no-repeat}
+header.top{background:var(--navy);color:#fff}
+header.top .w{max-width:1180px;margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+header.top b{font-family:Lora,Georgia,serif;font-size:20px}
+header.top small{display:block;font-size:11px;letter-spacing:2.5px;color:var(--orange2);font-weight:900;font-family:Lato,sans-serif}
+.who{display:flex;gap:10px;align-items:center;font-size:13.5px;color:var(--pale);flex-wrap:wrap}
+main{max-width:1180px;margin:24px auto 60px;padding:0 16px;display:grid;gap:20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 30px rgba(27,46,94,.07);padding:clamp(16px,3vw,26px);min-width:0}
+h2{font-size:21px;margin-bottom:4px}
+.hint{color:var(--muted);font-size:14px;margin:0 0 16px}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#fff;border:0;border-radius:10px;padding:10px 16px;font:900 14px Lato,sans-serif;cursor:pointer;text-decoration:none}
+.btn.ln{background:#fff;color:var(--navy);border:1.5px solid var(--line)}
+.btn.sm{padding:7px 12px;font-size:13px}
+.login{max-width:520px;margin:40px auto;text-align:center}
+.login .lock{font-size:46px}
+.msg{font-weight:700;font-size:14px}
+.msg.err{color:var(--red)}
+.filtros{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end}
+.filtros label{font-size:11.5px;letter-spacing:1.4px;font-weight:900;color:var(--muted);display:block;margin-bottom:5px}
+select{font:inherit;color:inherit;border:1.5px solid var(--line);border-radius:10px;padding:9px 12px;background:#fff;min-width:200px;max-width:100%}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.kpi{background:var(--light);border-radius:14px;padding:16px}
+.kpi .v{font-size:34px;font-weight:900;font-variant-numeric:tabular-nums;line-height:1.1}
+.kpi .l{font-size:12px;letter-spacing:1.3px;font-weight:900;color:var(--muted);text-transform:uppercase}
+.kpi small{display:block;color:var(--muted);font-size:12.5px;margin-top:4px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.chip{background:var(--light);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:700}
+.scroll{overflow-x:auto}
+table.hm{border-collapse:separate;border-spacing:4px;width:100%;min-width:640px}
+table.hm th{font-size:12px;letter-spacing:1px;color:var(--muted);font-weight:900;text-align:center;padding:6px}
+table.hm th.eje{text-align:left;color:var(--navy);font-size:14px;letter-spacing:0;white-space:nowrap}
+table.hm td{border-radius:10px;text-align:center;padding:10px 6px;font-weight:900;font-variant-numeric:tabular-nums;font-size:17px}
+table.hm td small{display:block;font-size:11px;font-weight:700;opacity:.75}
+table.hm td.vacio{background:var(--light);color:var(--gris);font-size:13px}
+.ley{display:flex;gap:12px;align-items:center;font-size:12.5px;color:var(--muted);margin-top:10px;flex-wrap:wrap}
+.ley i{display:inline-block;width:26px;height:12px;border-radius:4px;vertical-align:middle}
+.stack{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr) 46px;gap:12px;align-items:center;padding:9px 0;border-top:1px solid var(--line);font-size:14px}
+.stack:first-of-type{border-top:0}
+.sb{display:flex;height:22px;border-radius:7px;overflow:hidden;background:var(--light)}
+.sb span{display:flex;align-items:center;justify-content:center;color:#fff;font-size:11.5px;font-weight:900;white-space:nowrap;overflow:hidden}
+.n{color:var(--muted);font-size:12px;text-align:right;font-variant-numeric:tabular-nums}
+details.eje{border-top:1px solid var(--line)}
+details.eje:first-of-type{border-top:0}
+details.eje summary{cursor:pointer;list-style:none;padding:16px 0;display:flex;justify-content:space-between;gap:12px;align-items:center}
+details.eje summary::-webkit-details-marker{display:none}
+details.eje summary b{font-family:Lora,Georgia,serif;font-size:18px}
+details.eje summary small{display:block;color:var(--muted);font-size:13px;font-family:Lato,sans-serif}
+.prom{font-weight:900;font-size:20px;border-radius:10px;padding:6px 12px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.qb{padding:12px 0 16px;border-top:1px dashed var(--line)}
+.qb .qt{font-weight:700;font-size:14.5px;margin-bottom:8px;display:flex;gap:8px;flex-wrap:wrap;align-items:baseline}
+.rtag{font-size:11px;font-weight:900;letter-spacing:.8px;background:var(--light);color:var(--muted);border-radius:999px;padding:2px 8px}
+.bar{display:grid;grid-template-columns:minmax(0,230px) minmax(0,1fr) 40px;gap:10px;align-items:center;font-size:13.5px;margin:4px 0}
+.bar .tr{height:14px;background:var(--light);border-radius:6px;overflow:hidden}
+.bar .tr i{display:block;height:100%;background:var(--sky);border-radius:6px}
+.esc5{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.esc5 .big{font-size:26px;font-weight:900;font-variant-numeric:tabular-nums;min-width:56px}
+.dist{display:flex;height:18px;border-radius:6px;overflow:hidden;flex:1;min-width:180px;max-width:420px}
+.dist span{display:block;height:100%}
+.citas{display:grid;gap:8px;max-height:340px;overflow:auto;padding-right:4px}
+.cita{background:var(--light);border-left:4px solid var(--orange2);border-radius:8px;padding:10px 12px;font-size:14px}
+.cita small{display:block;color:var(--muted);font-size:12px;margin-top:4px}
+.vacio{color:var(--muted);font-size:14px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+@media(max-width:860px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.grid2{grid-template-columns:1fr}.stack,.bar{grid-template-columns:1fr 40px}.stack>div:first-child,.bar>div:first-child{grid-column:1/-1}}
+</style>
+</head>
+<body>
+<div class="band" aria-hidden="true"></div>
+<header class="top"><div class="w"><b><small>PLAN DUAL · RELEVAMIENTO</small>Tablero para la normativa</b><div class="who" id="who" hidden><span id="whoTxt"></span><button class="btn ln sm" id="salir">Salir</button></div></div></header>
+
+<main>
+  <section class="card login" id="login">
+    <div class="lock">🔐</div>
+    <h2>Acceso restringido</h2>
+    <p class="hint">Ingresá con tu cuenta de Gmail. Te enviamos un código de un solo uso. Solo las cuentas autorizadas por la Dirección General pueden ver los resultados.</p>
+    <div id="gbtn"></div>
+    <p class="msg" id="lmsg" style="color:var(--muted)"></p>
+  </section>
+
+  <div id="panel" hidden style="display:grid;gap:20px">
+    <section class="card">
+      <div class="filtros">
+        <div><label for="fRol">ROL</label><select id="fRol"><option value="">Todos los roles</option></select></div>
+        <div><label for="fEsc">ESCUELA</label><select id="fEsc"><option value="">Todas las escuelas</option></select></div>
+        <div style="margin-left:auto;display:flex;gap:8px;flex-wrap:wrap"><button class="btn ln sm" id="recargar">↻ Actualizar</button><button class="btn sm" id="csv">⬇ Descargar CSV</button></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="kpis">
+        <div class="kpi"><div class="l">Respuestas</div><div class="v" id="kTot">0</div><small id="kUlt"></small></div>
+        <div class="kpi"><div class="l">Escuelas con respuestas</div><div class="v" id="kEsc">0</div><small id="kEscT"></small></div>
+        <div class="kpi"><div class="l">Participación de 7° año</div><div class="v" id="kPart">—</div><small id="kPartT">según directivos</small></div>
+        <div class="kpi"><div class="l">Recomendarían el Plan</div><div class="v" id="kRec">—</div><small>estudiantes y familias</small></div>
+      </div>
+      <div class="chips" id="kRoles"></div>
+    </section>
+
+    <section class="card">
+      <h2>Mapa de valoración por eje y rol</h2>
+      <p class="hint">Promedio de las escalas del 1 (nada) al 5 (totalmente). En rojo, los temas que la normativa debería atender con prioridad.</p>
+      <div class="scroll"><table class="hm" id="hm"></table></div>
+      <div class="ley"><span><i style="background:hsl(4,70%,82%)"></i> 1–2,4 crítico</span><span><i style="background:hsl(42,85%,80%)"></i> 2,5–3,4 a mejorar</span><span><i style="background:hsl(120,40%,78%)"></i> 3,5–5 funciona</span><span>· n = cantidad de respuestas</span></div>
+    </section>
+
+    <section class="card">
+      <h2>¿Lo fija la norma o se acuerda localmente?</h2>
+      <p class="hint">Opinión de directivos, tutores y empresas. Orienta qué debe quedar en la normativa general y qué se deja al acuerdo entre cada escuela y su empresa.</p>
+      <div id="norma"></div>
+      <div class="ley"><span><i style="background:var(--green)"></i> Lo fija la norma</span><span><i style="background:var(--navy)"></i> Se acuerda escuela–empresa</span><span><i style="background:var(--gris)"></i> No sé</span></div>
+    </section>
+
+    <section class="card">
+      <h2>Detalle por eje de la normativa</h2>
+      <p class="hint">Cada eje equivale a un capítulo de la futura resolución. Abrí uno para ver todas sus preguntas y lo que escribieron.</p>
+      <div id="ejes"></div>
+    </section>
+  </div>
+</main>
+
+<script src="assets/config.js"></script>
+<script src="assets/preguntas.js"></script>
+<script src="assets/acceso.js"></script>
+<script>
+(function(){
+  var R = window.RELEV, DATA = null, ESCUELAS = [];
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function fmt(n, d){ return (Math.round(n * Math.pow(10, d||1)) / Math.pow(10, d||1)).toLocaleString('es-AR'); }
+  function color(v){ var h = v < 2.5 ? 4 : v < 3.5 ? 42 : 120; var l = v < 2.5 ? 82 : v < 3.5 ? 80 : 78; var s = v < 2.5 ? 70 : v < 3.5 ? 85 : 40; return 'hsl('+h+','+s+'%,'+l+'%)'; }
+
+  /* ---------- Acceso ---------- */
+  function entrar(s){
+    if (!s.tablero) { $('lmsg').textContent = 'Tu cuenta no tiene acceso al tablero.'; PDAcceso.salir(); return; }
+    $('whoTxt').textContent = '🔒 ' + s.email; $('who').hidden = false;
+    $('login').hidden = true; $('panel').hidden = false;
+    cargar();
+  }
+  $('salir').onclick = function(){ PDAcceso.salir(); location.reload(); };
+  var guardada = PDAcceso.sesion();
+  if (guardada && guardada.tablero) entrar(guardada);
+  else PDAcceso.boton($('gbtn'), entrar, function(m){ $('lmsg').textContent = m; });
+
+  function cargar(){
+    $('recargar').disabled = true;
+    PDAcceso.llamar({ accion: 'tablero' }).then(function(j){
+      if (!j.ok) {
+        if (j.vencida) { location.reload(); return; }
+        throw new Error(j.error || 'No se pudieron leer los datos');
+      }
+      DATA = j; ESCUELAS = j.escuelas || [];
+      armarFiltros(); dibujar();
+    }).catch(function(e){ alert(e.message); }).then(function(){ $('recargar').disabled = false; });
+  }
+  $('recargar').onclick = cargar;
+
+  /* ---------- Datos ---------- */
+  function armarFiltros(){
+    var fr = $('fRol'), fe = $('fEsc'), vr = fr.value, ve = fe.value;
+    fr.innerHTML = '<option value="">Todos los roles</option>' + Object.keys(R.ROLES).map(function(k){ return '<option value="'+k+'">'+esc(R.ROLES[k].nombre)+'</option>'; }).join('');
+    var escs = {}; DATA.respuestas.forEach(function(r){ escs[r.escuela] = 1; });
+    fe.innerHTML = '<option value="">Todas las escuelas</option>' + Object.keys(escs).sort().map(function(e){ return '<option>'+esc(e)+'</option>'; }).join('');
+    fr.value = vr; fe.value = ve;
+  }
+  $('fRol').onchange = dibujar; $('fEsc').onchange = dibujar;
+
+  function filtrado(){
+    var fr = $('fRol').value, fe = $('fEsc').value;
+    var resp = DATA.respuestas.filter(function(r){ return (!fr || r.rol === fr) && (!fe || r.escuela === fe); });
+    var ids = {}; resp.forEach(function(r){ ids[r.id] = r; });
+    var datos = DATA.datos.filter(function(d){ return ids[d[0]]; }).map(function(d){ return { r: ids[d[0]], c: d[1], v: d[2] }; });
+    return { resp: resp, datos: datos };
+  }
+
+  /* ---------- Dibujo ---------- */
+  function dibujar(){
+    var F = filtrado(), resp = F.resp, datos = F.datos;
+    // KPIs
+    $('kTot').textContent = resp.length;
+    var ult = resp.reduce(function(m, r){ return r.fecha > m ? r.fecha : m; }, '');
+    $('kUlt').textContent = ult ? 'Última: ' + new Date(ult).toLocaleDateString('es-AR', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' }) : 'Sin respuestas todavía';
+    var escs = {}; resp.forEach(function(r){ escs[r.escuela] = 1; });
+    $('kEsc').textContent = Object.keys(escs).length;
+    $('kEscT').textContent = 'escuelas distintas';
+    var e7 = 0, pa = 0; datos.forEach(function(d){ if (d.c === 'DIR_EST7') e7 += +d.v || 0; if (d.c === 'DIR_PART') pa += +d.v || 0; });
+    $('kPart').textContent = e7 ? fmt(100 * pa / e7, 0) + '%' : '—';
+    $('kPartT').textContent = e7 ? pa + ' de ' + e7 + ' estudiantes (según directivos)' : 'según directivos';
+    var rs = datos.filter(function(d){ return d.c === 'EST_REC' || d.c === 'FAM_REC'; });
+    $('kRec').textContent = rs.length ? fmt(100 * rs.filter(function(d){ return d.v === 'Sí'; }).length / rs.length, 0) + '%' : '—';
+    var porRol = {}; resp.forEach(function(r){ porRol[r.rol] = (porRol[r.rol] || 0) + 1; });
+    $('kRoles').innerHTML = Object.keys(R.ROLES).map(function(k){ return '<span class="chip">'+R.ROLES[k].icono+' '+esc(R.ROLES[k].nombre)+': '+(porRol[k]||0)+'</span>'; }).join('');
+
+    // Mapa de calor
+    var roles = Object.keys(R.ROLES);
+    var h = '<thead><tr><th></th>' + roles.map(function(k){ return '<th>'+R.ROLES[k].icono+'<br>'+esc(R.ROLES[k].nombre.toUpperCase())+'</th>'; }).join('') + '<th>TODOS</th></tr></thead><tbody>';
+    Object.keys(R.EJES).forEach(function(e){
+      h += '<tr><th class="eje">'+e+'. '+esc(R.EJES[e].nombre)+'</th>';
+      roles.concat(['*']).forEach(function(k){
+        var vs = datos.filter(function(d){ var q = R.IDX[d.c]; return q && q.tipo === 'escala' && q.eje === e && (k === '*' || d.r.rol === k); }).map(function(d){ return +d.v; });
+        if (!vs.length) { h += '<td class="vacio">—</td>'; return; }
+        var p = vs.reduce(function(a,b){ return a+b; }, 0) / vs.length;
+        h += '<td style="background:'+color(p)+'">'+fmt(p)+'<small>n='+vs.length+'</small></td>';
+      });
+      h += '</tr>';
+    });
+    $('hm').innerHTML = h + '</tbody>';
+
+    // Norma vs acuerdo
+    var cols = { 'Lo fija la norma':'var(--green)', 'Se acuerda escuela–empresa':'var(--navy)', 'No sé':'var(--gris)' };
+    $('norma').innerHTML = R.TEMAS_NORMA.map(function(t){
+      var vs = datos.filter(function(d){ return d.c === t.id; });
+      var bar = vs.length ? R.OPC_NORMA.map(function(o){
+        var c = vs.filter(function(d){ return d.v === o; }).length, p = 100 * c / vs.length;
+        return p ? '<span style="width:'+p+'%;background:'+cols[o]+'" title="'+esc(o)+': '+c+'">'+(p >= 12 ? fmt(p,0)+'%' : '')+'</span>' : '';
+      }).join('') : '';
+      return '<div class="stack"><div>'+esc(t.txt)+'</div><div class="sb">'+bar+'</div><div class="n">n='+vs.length+'</div></div>';
+    }).join('');
+
+    // Detalle por eje
+    var abiertos = {}; document.querySelectorAll('details.eje[open]').forEach(function(d){ abiertos[d.dataset.eje] = 1; });
+    $('ejes').innerHTML = Object.keys(R.EJES).map(function(e){
+      var qs = []; Object.keys(R.P).forEach(function(rol){ if ($('fRol').value && $('fRol').value !== rol) return; R.P[rol].forEach(function(q){ if (q.eje === e && q.tipo !== 'norma') qs.push(Object.assign({ rol: rol }, q)); }); });
+      var esc5 = datos.filter(function(d){ var q = R.IDX[d.c]; return q && q.tipo === 'escala' && q.eje === e; }).map(function(d){ return +d.v; });
+      var prom = esc5.length ? esc5.reduce(function(a,b){ return a+b; }, 0) / esc5.length : null;
+      var cuerpo = qs.map(function(q){ return bloque(q, datos.filter(function(d){ return d.c === q.id; })); }).join('');
+      return '<details class="eje" data-eje="'+e+'"'+(abiertos[e] ? ' open' : '')+'><summary><span><b>'+e+'. '+esc(R.EJES[e].nombre)+'</b><small>Para la norma: '+esc(R.EJES[e].norma)+'</small></span>' +
+        (prom != null ? '<span class="prom" style="background:'+color(prom)+'">'+fmt(prom)+' / 5</span>' : '<span class="prom" style="background:var(--light);color:var(--gris)">—</span>') +
+        '</summary>' + (cuerpo || '<p class="vacio">Sin preguntas para este filtro.</p>') + '</details>';
+    }).join('');
+  }
+
+  function bloque(q, ds){
+    var cab = '<div class="qt">'+esc(q.txt)+' <span class="rtag">'+R.ROLES[q.rol].icono+' '+esc(R.ROLES[q.rol].nombre)+'</span><span class="rtag">n='+ds.length+'</span></div>';
+    if (!ds.length) return '<div class="qb">'+cab+'<p class="vacio">Sin respuestas.</p></div>';
+    var h = '';
+    if (q.tipo === 'escala') {
+      var vs = ds.map(function(d){ return +d.v; }), p = vs.reduce(function(a,b){ return a+b; }, 0) / vs.length;
+      var tonos = ['hsl(4,65%,62%)','hsl(25,80%,68%)','hsl(45,85%,65%)','hsl(100,40%,62%)','hsl(125,45%,45%)'];
+      h = '<div class="esc5"><span class="big" style="color:'+(p<2.5?'var(--red)':p<3.5?'var(--orange)':'var(--green)')+'">'+fmt(p)+'</span><div class="dist">' +
+        [1,2,3,4,5].map(function(i){ var c = vs.filter(function(v){ return v === i; }).length; return c ? '<span style="width:'+(100*c/vs.length)+'%;background:'+tonos[i-1]+'" title="'+i+' ('+R.ESCALA[i-1]+'): '+c+'"></span>' : ''; }).join('') +
+        '</div><span class="n">1 = Nada · 5 = Totalmente</span></div>';
+    } else if (q.tipo === 'opcion' || q.tipo === 'multi') {
+      var cnt = {}; ds.forEach(function(d){ String(d.v).split(' | ').forEach(function(o){ cnt[o] = (cnt[o]||0) + 1; }); });
+      var max = Math.max.apply(null, Object.keys(cnt).map(function(k){ return cnt[k]; }));
+      h = Object.keys(cnt).sort(function(a,b){ return cnt[b]-cnt[a]; }).map(function(o){
+        return '<div class="bar"><div>'+esc(o)+'</div><div class="tr"><i style="width:'+(100*cnt[o]/max)+'%"></i></div><div class="n">'+cnt[o]+'</div></div>'; }).join('');
+    } else if (q.tipo === 'numero') {
+      var ns = ds.map(function(d){ return +d.v || 0; }), s = ns.reduce(function(a,b){ return a+b; }, 0);
+      h = '<div class="esc5"><span class="big">'+s.toLocaleString('es-AR')+'</span><span class="n">total · promedio '+fmt(s/ns.length)+' por respuesta</span></div>';
+    } else if (q.tipo === 'texto') {
+      h = '<div class="citas">' + ds.map(function(d){ return '<div class="cita">“'+esc(d.v)+'”<small>'+esc(d.r.escuela)+(d.r.localidad ? ' · '+esc(d.r.localidad) : '')+'</small></div>'; }).join('') + '</div>';
+    } else if (q.tipo === 'enlace') {
+      h = '<div class="citas">' + ds.map(function(d){ var ok = /^https:\/\//i.test(d.v); return '<div class="cita">'+(ok ? '<a href="'+esc(d.v)+'" target="_blank" rel="noopener noreferrer">Abrir evidencias ↗</a>' : esc(d.v))+'<small>'+esc(d.r.escuela)+'</small></div>'; }).join('') + '</div>';
+    }
+    return '<div class="qb">'+cab+h+'</div>';
+  }
+
+  /* ---------- CSV ---------- */
+  $('csv').onclick = function(){
+    if (!DATA) return;
+    var F = filtrado(), filas = [['id','fecha','rol','escuela','localidad','especialidad','empresa','eje','codigo','pregunta','respuesta']];
+    F.datos.forEach(function(d){ var q = R.IDX[d.c] || {}; filas.push([d.r.id, d.r.fecha, d.r.rol, d.r.escuela, d.r.localidad, d.r.especialidad, d.r.empresa, q.eje || '', d.c, q.txt || '', d.v]); });
+    var csv = '﻿' + filas.map(function(f){ return f.map(function(c){ c = String(c == null ? '' : c); if (/^[=+\-@]/.test(c)) c = "'" + c; return '"' + c.replace(/"/g,'""') + '"'; }).join(';'); }).join('\r\n');
+    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type:'text/csv;charset=utf-8' }));
+    a.download = 'relevamiento_plan_dual.csv'; document.body.appendChild(a); a.click(); a.remove();
+  };
+})();
+</script>
+</body>
+</html>

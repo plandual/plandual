@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Construyamos juntos el Plan Dual · Relevamiento · DGETyFP</title>
+<meta name="description" content="Relevamiento del Plan Dual a la Cordobesa: directivos, docentes, empresas, estudiantes y familias aportan su experiencia para construir la normativa.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='19' fill='%231B2E5E'/%3E%3Ccircle cx='20' cy='20' r='7' fill='%23C55A11'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1B2E5E;--deep:#14234a;--orange:#C55A11;--orange2:#E07B39;--green:#52A14D;--sky:#69ACDF;--muted:#5A6685;--pale:#C9D4EE;--light:#F4F6FA;--line:#E3E8F2;--red:#C8102E}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Lato,Calibri,Arial,sans-serif;color:var(--navy);background:var(--light);line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Lora,Cambria,Georgia,serif;margin:0;line-height:1.2;text-wrap:balance}
+a{color:inherit}
+.band{height:46px;background:var(--green) url(assets/band.png) right center/auto 100% no-repeat}
+header.top{background:var(--navy);color:#fff}
+header.top .w{max-width:920px;margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+header.top a{color:#fff;text-decoration:none;font-weight:900}
+header.top small{display:block;font-size:11px;letter-spacing:2.5px;color:var(--orange2);font-weight:900}
+.hero{background:var(--navy);color:#fff;padding:26px 20px 64px;position:relative;overflow:hidden}
+.hero .w{max-width:920px;margin:0 auto;position:relative}
+.kicker{font-size:12px;letter-spacing:3px;font-weight:900;color:var(--orange2);text-transform:uppercase;margin-bottom:10px}
+.hero h1{font-size:clamp(28px,5vw,44px)}
+.hero h1 em{color:var(--orange2);font-style:italic}
+.hero p{color:var(--pale);font-size:17px;max-width:680px;margin:14px 0 0}
+main{max-width:920px;margin:-40px auto 60px;padding:0 16px;position:relative;display:grid;gap:20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 30px rgba(27,46,94,.08);padding:clamp(18px,4vw,30px)}
+.why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:6px}
+.why div{background:var(--light);border-radius:12px;padding:14px 16px;font-size:14.5px;color:var(--muted)}
+.why b{display:block;color:var(--navy);font-size:15px;margin-bottom:2px}
+h2{font-size:23px;margin-bottom:6px}
+.hint{color:var(--muted);font-size:14.5px;margin:0 0 16px}
+.roles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+@media(max-width:860px){.roles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.rol{border:2px solid var(--line);background:#fff;border-radius:14px;padding:16px 14px;text-align:left;cursor:pointer;font:inherit;color:inherit;display:flex;flex-direction:column;gap:4px;transition:border-color .15s,transform .15s}
+.rol:hover{border-color:var(--sky);transform:translateY(-2px)}
+.rol:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+.rol.on{border-color:var(--orange);box-shadow:0 0 0 3px rgba(197,90,17,.15)}
+.rol .ic{font-size:28px}
+.rol b{font-size:16px}
+.rol span{font-size:13px;color:var(--muted)}
+.rol small{font-size:12px;font-weight:900;color:var(--orange);letter-spacing:1px}
+label.lb{display:block;font-size:12px;letter-spacing:1.4px;font-weight:900;color:var(--muted);margin-bottom:6px;text-transform:uppercase}
+input[type=text],input[type=email],input[type=number],input[type=url],textarea,select{width:100%;font:inherit;color:inherit;border:1.5px solid var(--line);border-radius:10px;padding:11px 13px;background:#fff}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(27,46,94,.12)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.q{padding:18px 0;border-top:1px solid var(--line)}
+.q:first-child{border-top:0;padding-top:4px}
+.q .t{font-weight:900;font-size:16px;margin-bottom:10px;display:flex;gap:10px;align-items:flex-start}
+.q .t .req{color:var(--orange)}
+.eje{flex:none;font-size:11px;font-weight:900;letter-spacing:1px;background:var(--light);color:var(--muted);border-radius:999px;padding:3px 9px;margin-top:2px;white-space:nowrap}
+.esc{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.esc label{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;border:1.5px solid var(--line);border-radius:12px;padding:9px 4px;cursor:pointer;font-size:12px;color:var(--muted);text-align:center}
+.esc label b{font-size:18px;color:var(--navy)}
+.esc input,.ops input,.nm input{position:absolute;opacity:0;width:1px;height:1px;left:0;top:0}
+.esc label:has(input:checked){background:var(--navy);border-color:var(--navy);color:#fff}
+.esc label:has(input:checked) b{color:#fff}
+.esc label:has(input:focus-visible),.ops label:has(input:focus-visible),.nm label:has(input:focus-visible){outline:3px solid var(--sky);outline-offset:2px}
+.ops{display:flex;flex-wrap:wrap;gap:8px}
+.ops label{position:relative;border:1.5px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;font-size:14.5px}
+.ops label:has(input:checked){background:var(--orange);border-color:var(--orange);color:#fff;font-weight:700}
+.nm{width:100%;border-collapse:collapse}
+.nm td{padding:8px 6px;border-top:1px solid var(--line);vertical-align:middle;font-size:14.5px}
+.nm tr:first-child td{border-top:0}
+.nm .opts{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.nm label{position:relative;border:1.5px solid var(--line);border-radius:999px;padding:6px 11px;cursor:pointer;font-size:13px;white-space:nowrap}
+.nm label:has(input:checked){background:var(--navy);border-color:var(--navy);color:#fff}
+.nm label.n1:has(input:checked){background:var(--green);border-color:var(--green)}
+.legal{font-size:13.5px;color:var(--muted);display:flex;gap:10px;align-items:flex-start}
+.legal input{margin-top:4px;width:18px;height:18px;flex:none}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:12px;font-weight:900;font-size:15.5px;text-decoration:none;border:0;cursor:pointer;font-family:inherit;background:var(--orange);color:#fff;box-shadow:0 8px 20px rgba(197,90,17,.3)}
+.btn:disabled{opacity:.6;cursor:wait}
+.btn.ln{background:#fff;color:var(--navy);border:1.5px solid var(--line);box-shadow:none}
+.msg{font-weight:700;font-size:14.5px}
+.msg.err{color:var(--red)} .msg.ok{color:#2f6b2c}
+.prog{position:sticky;top:0;z-index:20;background:var(--navy);color:#fff;border-radius:0 0 14px 14px;padding:10px 18px;display:flex;align-items:center;gap:14px;font-size:13.5px;font-weight:700}
+.prog .bar{flex:1;height:8px;border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden}
+.prog .bar i{display:block;height:100%;width:0;background:var(--orange2);transition:width .3s}
+.gracias{text-align:center;padding:40px 20px}
+.gracias .big{font-size:54px}
+.cerrado{background:#FFF6EF;border:1px solid #F3C9A8;color:#7a3a0d}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:0 16px 40px}
+@media(max-width:700px){.why,.grid2{grid-template-columns:1fr}.esc label span{display:none}.nm td{display:block;border:0;padding:4px 0}.nm tr{display:block;border-top:1px solid var(--line);padding:8px 0}.nm .opts{justify-content:flex-start}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="band" aria-hidden="true"></div>
+<header class="top"><div class="w"><a href="index.html"><small>DGETyFP · CÓRDOBA</small>← Plan Dual</a><a href="tablero.html" style="font-size:13px;opacity:.7;font-weight:700">Acceso autoridades</a></div></header>
+
+<section class="hero">
+  <div class="w">
+    <div class="kicker">Relevamiento 2026 · Plan Dual a la Cordobesa</div>
+    <h1>Construyamos juntos <em>la normativa</em></h1>
+    <p>El Plan Dual se implementó primero para después legislar a partir de la experiencia real. Tu mirada sobre cómo funcionó en tu escuela o en tu empresa es la base de la futura norma.</p>
+  </div>
+</section>
+
+<main>
+  <section class="card" id="intro">
+    <div class="why">
+      <div><b>⏱ Pocos minutos</b>Entre 3 y 10 según tu rol. Son preguntas para marcar y algunas para escribir.</div>
+      <div><b>🔒 Datos cuidados</b>Estudiantes y familias responden de forma anónima. Los resultados solo los ven las autoridades.</div>
+      <div><b>📜 Para qué sirve</b>Cada respuesta se ordena por los temas que tendrá la normativa: alternancia, roles, evaluación, seguridad y convenios.</div>
+    </div>
+    <p class="msg" id="estado" style="margin:14px 0 0"></p>
+  </section>
+
+  <section class="card" id="paso1">
+    <h2>1. ¿Cuál es tu rol en el Plan Dual?</h2>
+    <p class="hint">Elegí una opción. Si cumpliste más de un rol, podés completar la consulta una vez por cada uno.</p>
+    <div class="roles" id="roles" role="radiogroup" aria-label="Rol"></div>
+  </section>
+
+  <form id="form" hidden novalidate autocomplete="on">
+    <div class="prog" aria-hidden="true"><span id="progTxt">0%</span><div class="bar"><i id="progBar"></i></div><span id="rolTxt"></span></div>
+
+    <section class="card" style="margin-top:14px">
+      <h2>2. Contexto</h2>
+      <p class="hint">Nos permite cruzar las respuestas por escuela, localidad y especialidad.</p>
+      <div class="grid2">
+        <div><label class="lb" for="escuela" id="lbEscuela">Escuela *</label><input type="text" id="escuela" name="escuela" list="listaEscuelas" required placeholder="Ej.: IPET 110"><datalist id="listaEscuelas"></datalist></div>
+        <div><label class="lb" for="localidad">Localidad *</label><input type="text" id="localidad" name="localidad" required></div>
+        <div id="boxEsp"><label class="lb" for="especialidad">Especialidad</label><input type="text" id="especialidad" name="especialidad" placeholder="Ej.: Electromecánica"></div>
+        <div id="boxEmp"><label class="lb" for="empresa" id="lbEmpresa">Empresa u organización</label><input type="text" id="empresa" name="empresa"></div>
+      </div>
+      <div class="grid2" id="boxContacto" style="margin-top:16px">
+        <div><label class="lb" for="nombre">Nombre y apellido (opcional)</label><input type="text" id="nombre" name="nombre" autocomplete="name"></div>
+        <div><label class="lb" for="email">Email (opcional)</label><input type="email" id="email" name="email" autocomplete="email"></div>
+      </div>
+      <p class="hint" id="anon" style="margin:14px 0 0">🔒 Esta consulta es anónima: no te pedimos nombre ni email.</p>
+    </section>
+
+    <section class="card" style="margin-top:20px">
+      <h2>3. Tu experiencia</h2>
+      <p class="hint">En las escalas: 1 = Nada · 5 = Totalmente. Lo marcado con <b style="color:var(--orange)">*</b> es obligatorio.</p>
+      <div id="preguntas"></div>
+    </section>
+
+    <section class="card" style="margin-top:20px;display:grid;gap:14px">
+      <label class="legal"><input type="checkbox" id="acepto"> <span>Acepto que mis respuestas se usen, de forma agregada y sin datos personales, para la evaluación del Plan Dual y la elaboración de su normativa por parte del Ministerio de Educación de la Provincia de Córdoba.</span></label>
+      <input type="text" name="web" id="web" tabindex="-1" autocomplete="off" style="position:absolute;left:-5000px" aria-hidden="true">
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <button class="btn" id="enviar" type="submit">Enviar mis respuestas</button>
+        <button class="btn ln" type="button" id="cambiarRol">Cambiar de rol</button>
+        <span class="msg" id="msg" role="alert"></span>
+      </div>
+    </section>
+  </form>
+
+  <section class="card gracias" id="gracias" hidden>
+    <div class="big">💚</div>
+    <h2>¡Gracias por tu aporte!</h2>
+    <p class="hint" style="max-width:520px;margin:10px auto 22px">Tus respuestas ya forman parte del relevamiento. Con todas ellas vamos a construir la normativa del Plan Dual.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><a class="btn" href="index.html">Volver al sitio</a><button class="btn ln" type="button" id="otra">Responder con otro rol</button></div>
+  </section>
+</main>
+<footer>Ministerio de Educación de la Provincia de Córdoba · Dirección General de Educación Técnica y Formación Profesional</footer>
+
+<script src="assets/config.js"></script>
+<script src="assets/preguntas.js"></script>
+<script>
+(function(){
+  var R = window.RELEV, rol = null;
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  /* Roles */
+  Object.keys(R.ROLES).forEach(function(k){
+    var r = R.ROLES[k], b = document.createElement('button');
+    b.type = 'button'; b.className = 'rol'; b.dataset.rol = k; b.setAttribute('role','radio'); b.setAttribute('aria-checked','false');
+    b.innerHTML = '<span class="ic" aria-hidden="true">'+r.icono+'</span><b>'+esc(r.nombre)+'</b><span>'+esc(r.desc)+'</span><small>~'+r.min+' MIN</small>';
+    b.onclick = function(){ elegir(k); };
+    $('roles').appendChild(b);
+  });
+
+  /* Escuelas y estado del relevamiento */
+  function cargarEscuelas(lista){ $('listaEscuelas').innerHTML = lista.map(function(e){ return '<option value="'+esc(e)+'">'; }).join(''); }
+  cargarEscuelas(R.ESCUELAS_BASE);
+  fetch(PD.SCRIPT_URL + '?accion=config').then(function(r){ return r.json(); }).then(function(j){
+    if (j.escuelas && j.escuelas.length) cargarEscuelas(R.ESCUELAS_BASE.concat(j.escuelas).filter(function(e,i,a){ return a.indexOf(e) === i; }));
+    var c = j.config || {};
+    if (/^n/i.test(c.relevamiento_abierto || '')) {
+      $('intro').classList.add('cerrado');
+      $('estado').textContent = 'El relevamiento se encuentra cerrado. ¡Gracias a quienes participaron!';
+      $('paso1').hidden = true;
+    } else if (c.relevamiento_cierre) {
+      $('estado').textContent = '📅 Podés responder hasta el ' + c.relevamiento_cierre + '.';
+    }
+  }).catch(function(){});
+
+  /* Render de preguntas */
+  function htmlPregunta(q){
+    var t = '<div class="t"><span>'+esc(q.txt)+(q.req?' <span class="req">*</span>':'')+'</span><span class="eje" title="'+esc(R.EJES[q.eje].nombre)+'">'+esc(R.EJES[q.eje].nombre)+'</span></div>';
+    var n = 'q_'+q.id, h = '';
+    if (q.tipo === 'escala') {
+      h = '<div class="esc" role="radiogroup">' + R.ESCALA.map(function(lbl,i){ return '<label><input type="radio" name="'+n+'" value="'+(i+1)+'"><b>'+(i+1)+'</b><span>'+lbl+'</span></label>'; }).join('') + '</div>';
+    } else if (q.tipo === 'opcion' || q.tipo === 'multi') {
+      var tp = q.tipo === 'opcion' ? 'radio' : 'checkbox';
+      h = '<div class="ops">' + q.ops.map(function(o){ return '<label><input type="'+tp+'" name="'+n+'" value="'+esc(o)+'">'+esc(o)+'</label>'; }).join('') + '</div>';
+    } else if (q.tipo === 'numero') {
+      h = '<input type="number" name="'+n+'" min="0" max="5000" inputmode="numeric" style="max-width:180px">';
+    } else if (q.tipo === 'texto') {
+      h = '<textarea name="'+n+'" rows="3" maxlength="2000"></textarea>';
+    } else if (q.tipo === 'enlace') {
+      h = '<input type="url" name="'+n+'" placeholder="https://drive.google.com/...">';
+    } else if (q.tipo === 'norma') {
+      h = '<table class="nm"><tbody>' + R.TEMAS_NORMA.map(function(tm){
+        return '<tr><td>'+esc(tm.txt)+'</td><td><div class="opts">' + R.OPC_NORMA.map(function(o,i){
+          return '<label class="n'+i+'"><input type="radio" name="q_'+tm.id+'" value="'+esc(o)+'">'+esc(o)+'</label>'; }).join('') + '</div></td></tr>';
+      }).join('') + '</tbody></table>';
+    }
+    return '<div class="q" data-id="'+q.id+'">'+t+h+'</div>';
+  }
+
+  function elegir(k){
+    rol = k;
+    document.querySelectorAll('.rol').forEach(function(b){ var on = b.dataset.rol === k; b.classList.toggle('on', on); b.setAttribute('aria-checked', on); });
+    var anon = (k === 'estudiante' || k === 'familia');
+    $('boxContacto').hidden = anon; $('anon').hidden = !anon;
+    if (anon) { $('nombre').value = ''; $('email').value = ''; }
+    $('boxEsp').hidden = (k === 'familia');
+    $('lbEscuela').textContent = ({ empresa:'Escuela con la que trabajaron *', estudiante:'Tu escuela *', familia:'Escuela de tu hijo/a *' })[k] || 'Escuela *';
+    $('lbEmpresa').textContent = k === 'empresa' ? 'Nombre de la empresa u organización *' : 'Empresa u organización donde se hizo la práctica';
+    $('empresa').required = (k === 'empresa');
+    $('preguntas').innerHTML = R.P[k].map(htmlPregunta).join('');
+    $('rolTxt').textContent = R.ROLES[k].icono + ' ' + R.ROLES[k].nombre;
+    $('form').hidden = false; $('gracias').hidden = true; $('msg').textContent = '';
+    progreso();
+    $('form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  /* Lectura de respuestas */
+  function respuestas(){
+    var out = {};
+    R.P[rol].forEach(function(q){
+      if (q.tipo === 'norma') {
+        R.TEMAS_NORMA.forEach(function(tm){ var c = document.querySelector('input[name="q_'+tm.id+'"]:checked'); if (c) out[tm.id] = c.value; });
+        return;
+      }
+      var n = 'q_'+q.id;
+      if (q.tipo === 'escala' || q.tipo === 'opcion') { var c = document.querySelector('input[name="'+n+'"]:checked'); if (c) out[q.id] = c.value; }
+      else if (q.tipo === 'multi') { var v = [].map.call(document.querySelectorAll('input[name="'+n+'"]:checked'), function(i){ return i.value; }); if (v.length) out[q.id] = v.join(' | '); }
+      else { var el = document.querySelector('[name="'+n+'"]'); if (el && el.value.trim()) out[q.id] = el.value.trim(); }
+    });
+    return out;
+  }
+  function progreso(){
+    if (!rol) return;
+    var total = 0, r = respuestas();
+    R.P[rol].forEach(function(q){ total += q.tipo === 'norma' ? R.TEMAS_NORMA.length : 1; });
+    var p = Math.round(100 * Object.keys(r).length / total);
+    $('progTxt').textContent = p + '%'; $('progBar').style.width = p + '%';
+  }
+  $('form').addEventListener('change', progreso);
+  $('form').addEventListener('input', progreso);
+
+  $('cambiarRol').onclick = function(){ $('paso1').scrollIntoView({ behavior:'smooth' }); };
+  $('otra').onclick = function(){ $('form').reset(); $('gracias').hidden = true; rol = null; document.querySelectorAll('.rol').forEach(function(b){ b.classList.remove('on'); }); $('paso1').scrollIntoView({ behavior:'smooth' }); };
+
+  /* Envío */
+  $('form').addEventListener('submit', function(e){
+    e.preventDefault(); var m = $('msg'); m.className = 'msg';
+    var ctx = ['escuela','localidad'].concat(rol === 'empresa' ? ['empresa'] : []);
+    for (var i = 0; i < ctx.length; i++) if (!$(ctx[i]).value.trim()) { $(ctx[i]).focus(); m.textContent = 'Completá los datos de contexto marcados con *.'; m.className = 'msg err'; return; }
+    var r = respuestas();
+    var falta = R.P[rol].filter(function(q){ return q.req && !r[q.id]; })[0];
+    if (falta) { var el = document.querySelector('.q[data-id="'+falta.id+'"]'); el.scrollIntoView({ behavior:'smooth', block:'center' }); m.textContent = 'Falta responder: "' + falta.txt + '"'; m.className = 'msg err'; return; }
+    if ($('email').value && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test($('email').value)) { $('email').focus(); m.textContent = 'Revisá el email.'; m.className = 'msg err'; return; }
+    if (!$('acepto').checked) { m.textContent = 'Necesitamos tu conformidad para usar las respuestas.'; m.className = 'msg err'; return; }
+    if ($('web').value) return;
+    var datos = { rol: rol, escuela: $('escuela').value.trim(), localidad: $('localidad').value.trim(), especialidad: $('especialidad').value.trim(),
+      empresa: $('empresa').value.trim(), nombre: $('nombre').value.trim(), email: $('email').value.trim(), respuestas: r };
+    var b = $('enviar'); b.disabled = true; b.textContent = 'Enviando…';
+    var body = new URLSearchParams({ fuente:'web-plandual', accion:'relevamiento', datos: JSON.stringify(datos), web: $('web').value });
+    fetch(PD.SCRIPT_URL, { method:'POST', body: body }).then(function(x){ return x.json(); }).then(function(j){
+      if (!j.ok) throw new Error(j.error || 'No se pudo guardar');
+      $('form').hidden = true; $('gracias').hidden = false; $('form').reset(); $('gracias').scrollIntoView({ behavior:'smooth', block:'center' });
+    }).catch(function(err){
+      m.textContent = (err.message === 'Failed to fetch' ? 'No se pudo conectar. Revisá tu conexión e intentá de nuevo.' : err.message); m.className = 'msg err';
+    }).then(function(){ b.disabled = false; b.textContent = 'Enviar mis respuestas'; });
+  });
+})();
+</script>
+</body>
+</html>

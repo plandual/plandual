@@ -87,3 +87,50 @@ Lo mismo se puede editar directamente en la pestaña **Configuracion** de la pla
 ## Pendientes a revisar
 - El video de Drive tiene que estar compartido como **"Cualquier persona con el enlace"**.
 - Verificar que las fotos de experiencias puedan publicarse (derechos de imagen de estudiantes).
+
+---
+
+## RELEVAMIENTO PARA LA NORMATIVA (consulta.html + tablero.html)
+
+| Página | Quién la usa |
+|---|---|
+| `consulta.html` | Pública. Directivos, docentes tutores, empresas, estudiantes y familias responden según su rol. |
+| `tablero.html` | Solo cuentas de Google autorizadas en la pestaña **Accesos** de la planilla. |
+| `assets/preguntas.js` | Todas las preguntas, roles y ejes. Si se edita una pregunta, **no cambiar su código** (ej. `DIR_E1`). |
+| `assets/config.js` | URL del script e ID de cliente de Google. |
+
+### Seguridad de los datos
+- Las respuestas se guardan en la planilla **Plan Dual Consultas** (pestañas `Relevamiento` y `Relevamiento_datos`), que solo ve su dueña.
+- El tablero y el panel exigen demostrar que sos dueña de la cuenta de Gmail: el script envía un **código de un solo uso** (vence en 10 minutos, máximo 5 intentos) solo si el email está en la pestaña **Accesos**. Sin eso no entrega ningún dato.
+- Opcionalmente se puede sumar el botón "Acceder con Google" (ver más abajo).
+- La sesión dura 2 horas. Si se borra a alguien de **Accesos**, pierde el acceso en el momento.
+- El tablero nunca muestra nombres ni emails de quienes respondieron. Estudiantes y familias responden de forma anónima.
+- Cada ingreso queda registrado en la pestaña **Registro_accesos**.
+- No compartir la planilla: el tablero ya da acceso a los resultados.
+
+### (Opcional) Sumar el botón "Acceder con Google"
+1. Entrar a https://console.cloud.google.com con la cuenta dueña de la planilla.
+2. Crear un proyecto: **Plan Dual DGETyFP**.
+3. Menú ☰ → **APIs y servicios → Pantalla de consentimiento de OAuth** (o "Google Auth Platform"):
+   - Nombre de la app: *Plan Dual DGETyFP* · email de asistencia: el tuyo.
+   - Público / tipo de usuario: **Externo**.
+   - Completar email de contacto → Guardar.
+   - En **Público**, tocar **Publicar aplicación** (pasa a "En producción"). Como solo pide email y perfil, Google no exige verificación.
+4. **Clientes** (o "Credenciales") → **Crear cliente** → tipo **Aplicación web**.
+   - Nombre: *Sitio Plan Dual*.
+   - **Orígenes autorizados de JavaScript**: `https://plandual.github.io`
+   - Crear y copiar el **ID de cliente** (termina en `.apps.googleusercontent.com`).
+5. Pegar ese ID en:
+   - `assets/config.js` → `GOOGLE_CLIENT_ID: "…"`
+   - Apps Script → `const GOOGLE_CLIENT_ID = '…';`
+
+### Actualizar el script
+1. Apps Script de **Plan Dual Consultas** → reemplazar todo el código por el nuevo → Guardar.
+2. Ejecutar **instalar** y aceptar el permiso nuevo ("conectarse a un servicio externo": es para verificar las cuentas de Google).
+3. **Implementar → Administrar implementaciones → ✏️ → Nueva versión → Implementar** (la URL no cambia).
+
+### Dar o quitar acceso al tablero
+En la pestaña **Accesos**: una fila por cuenta de Google, con **SI/NO** en "Ve el tablero" y "Administra el sitio".
+
+### Desactivar la contraseña del panel
+Cuando el ingreso con código funcione, en el script cambiar `const PERMITIR_CLAVE = true;` por `false` → Guardar → Nueva versión. Así el panel de administración deja de aceptar contraseña.

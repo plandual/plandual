@@ -194,6 +194,10 @@ tr.hl td:first-child{border-left:4px solid var(--orange)}
 .exp p{margin:0;color:var(--muted);font-size:14.5px}
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
 .tags span{background:var(--light);border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700}
+.aviso-top{display:block;background:var(--orange);color:#fff;text-align:center;padding:11px 16px;font-size:15px;text-decoration:none;line-height:1.4}
+.aviso-top:hover{background:#d8651a}
+.aviso-top u{font-weight:900;white-space:nowrap}
+@media (max-width:600px){.aviso-top span{display:none}}
 .closed.open{background:#E6F3E5;color:#2f6b2c}
 .aviso{margin-top:18px;display:grid;grid-template-columns:auto 1fr auto auto;gap:16px;align-items:center;background:var(--navy);color:#fff;border-radius:16px;padding:20px 22px;animation:fade .35s ease}
 .aviso p{margin:4px 0 0;color:var(--pale)}
@@ -287,11 +291,13 @@ footer b{color:#fff}
       <a href="#escuelas-empresas">Escuelas y empresas</a>
       <a href="#normativa">Normativa</a>
       <a href="#postulacion">Postulación <span data-cfg="ciclo">2027</span></a>
+      <a href="consulta.html">Relevamiento</a>
       <a href="#preguntas">Preguntas</a>
       <a href="#contacto" class="btn btn-or" style="padding:8px 16px;color:#fff">Consultanos</a>
     </nav>
   </div>
 </header>
+<a class="aviso-top" href="consulta.html">📢 <b>Relevamiento 2026:</b> <span>ayudanos a construir la normativa del Plan Dual.</span> <u>Responder la consulta →</u></a>
 
 <main>
 <!-- HERO -->
@@ -306,6 +312,7 @@ footer b{color:#fff}
       <div class="ctas">
         <a class="btn btn-or" href="#escuelas-empresas" data-tab="escuelas">Soy escuela técnica</a>
         <a class="btn btn-ln" href="#escuelas-empresas" data-tab="empresas">Soy empresa</a>
+        <a class="btn btn-ln" href="consulta.html">📝 Completar la consulta</a>
       </div>
     </div>
     <div class="quote journey">
@@ -524,6 +531,16 @@ footer b{color:#fff}
 </section>
 
 <!-- FAQ -->
+<!-- RELEVAMIENTO -->
+<section class="sec alt" id="relevamiento">
+  <div class="wrap">
+    <div class="legal-cta reveal" style="margin-top:0">
+      <div><div class="kicker" style="color:var(--orange2)">Relevamiento 2026</div><b style="font-size:22px;font-family:Lora,Georgia,serif">Construyamos juntos la normativa del Plan Dual</b><p>El Plan se implementó primero para después legislar sobre la experiencia. Directivos, docentes, empresas, estudiantes y familias: tu mirada es la base de la futura norma.</p></div>
+      <a class="btn btn-or" href="consulta.html">Responder la consulta →</a>
+    </div>
+  </div>
+</section>
+
 <section class="sec" id="preguntas">
   <div class="wrap" style="max-width:900px">
     <div class="kicker">Preguntas frecuentes</div>

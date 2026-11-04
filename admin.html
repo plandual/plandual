@@ -51,12 +51,15 @@ input:focus,textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 
   <!-- Ingreso -->
   <section class="card" id="login">
     <h2>Ingresar</h2>
-    <p class="hint">Acceso exclusivo para el equipo técnico de la DGETyFP. Usuario: tu email de administradora.</p>
-    <form id="fLogin" class="grid">
+    <p class="hint">Acceso exclusivo para el equipo técnico de la DGETyFP. Ingresá con tu cuenta de Gmail autorizada: te enviamos un código de un solo uso.</p>
+    <div id="gbtn" style="min-height:44px"></div>
+    <p class="msg" id="gmsg" style="color:var(--muted)"></p>
+    <details id="boxClave" hidden style="margin-top:14px"><summary style="cursor:pointer;color:var(--muted);font-size:14px">Ingresar con contraseña (acceso temporal)</summary>
+    <form id="fLogin" class="grid" style="margin-top:12px">
       <div><label for="usuario">Usuario (email)</label><input id="usuario" type="email" required autocomplete="username" placeholder="nombre@gmail.com"></div>
       <div><label for="clave">Contraseña</label><input id="clave" type="password" required autocomplete="current-password"></div>
       <div><button class="btn nv" id="bLogin">Entrar</button></div>
-    </form>
+    </form></details>
     <p class="msg" id="mLogin"></p>
   </section>
 
@@ -73,7 +76,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 
         <h2>Convocatoria</h2>
         <p class="hint">Cuando está cerrada, el botón "Formulario de inscripción" muestra el anuncio de convocatoria cerrada.</p>
         <label>Estado de las postulaciones</label>
-        <div class="switch" role="group" aria-label="Estado de las postulaciones">
+        <div class="switch" id="swPost" role="group" aria-label="Estado de las postulaciones">
           <button type="button" class="si" data-v="SI">● Abiertas</button>
           <button type="button" class="no" data-v="NO">● Cerradas</button>
         </div>
@@ -83,6 +86,18 @@ input:focus,textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 
         </div>
         <div style="margin-top:16px"><label for="url_formulario">Enlace del formulario de inscripción</label><input id="url_formulario" name="url_formulario" type="url"></div>
         <div style="margin-top:16px"><label for="mensaje_cerrado">Anuncio de convocatoria cerrada</label><textarea id="mensaje_cerrado" name="mensaje_cerrado" rows="3"></textarea></div>
+      </section>
+
+      <section class="card">
+        <h2>Relevamiento para la normativa</h2>
+        <p class="hint">Consulta a directivos, docentes, empresas, estudiantes y familias. Los resultados se ven en el tablero, solo con cuentas autorizadas.</p>
+        <label>Estado del relevamiento</label>
+        <div class="switch" id="swRelev" role="group" aria-label="Estado del relevamiento">
+          <button type="button" class="si" data-v="SI">● Abierto</button>
+          <button type="button" class="no" data-v="NO">● Cerrado</button>
+        </div>
+        <div style="margin-top:16px"><label for="relevamiento_cierre">Fecha límite (texto)</label><input id="relevamiento_cierre" name="relevamiento_cierre" placeholder="ej.: 20 de noviembre"></div>
+        <div class="row" style="margin-top:16px"><a class="btn ln" href="consulta.html" target="_blank" rel="noopener">Ver la consulta →</a><a class="btn ln" href="tablero.html" target="_blank" rel="noopener">Abrir el tablero →</a></div>
       </section>
 
       <section class="card">
@@ -103,52 +118,69 @@ input:focus,textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 
   </div>
 </main>
 
+<script src="assets/config.js"></script>
+<script src="assets/acceso.js"></script>
 <script>
-var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzHpXCGDn-lpfvmJeQLPPakFcZFxKqhIIS_CArcGXOdHAOM8JyrFJFSA3nez5PUvcK9Dw/exec";
-var CAMPOS = ['ciclo','fecha_cierre','url_formulario','mensaje_cerrado','escuelas','empresas','estudiantes','localidades','especialidades'];
-var usuario = '', clave = '', estado = 'NO';
+var CAMPOS = ['ciclo','fecha_cierre','url_formulario','mensaje_cerrado','relevamiento_cierre','escuelas','empresas','estudiantes','localidades','especialidades'];
+var modo = '', usuario = '', clave = '', estado = { swPost: 'NO', swRelev: 'SI' };
 function $(id){ return document.getElementById(id); }
+
+/* Llamadas: con sesión de Google o, temporalmente, con email + contraseña */
 function llamar(datos){
+  if (modo === 'google') return PDAcceso.llamar(datos);
   var body = new URLSearchParams(datos); body.set('fuente','web-plandual'); body.set('usuario', usuario); body.set('clave', clave);
-  return fetch(SCRIPT_URL, { method:'POST', body: body }).then(function(r){ return r.json(); });
+  return fetch(PD.SCRIPT_URL, { method:'POST', body: body }).then(function(r){ return r.json(); });
 }
-function pintarEstado(v){
-  estado = v;
-  document.querySelectorAll('.switch button').forEach(function(b){ b.classList.toggle('on', b.dataset.v === v); b.setAttribute('aria-pressed', b.dataset.v === v); });
+function pintar(sw, v){
+  estado[sw] = v;
+  document.querySelectorAll('#'+sw+' button').forEach(function(b){ b.classList.toggle('on', b.dataset.v === v); b.setAttribute('aria-pressed', b.dataset.v === v); });
 }
+['swPost','swRelev'].forEach(function(sw){ document.querySelectorAll('#'+sw+' button').forEach(function(b){ b.onclick = function(){ pintar(sw, b.dataset.v); }; }); });
+
 function cargar(j){
   CAMPOS.forEach(function(k){ $(k).value = j.config[k] || ''; });
-  pintarEstado(/^s/i.test(j.config.postulaciones_abiertas) ? 'SI' : 'NO');
+  pintar('swPost', /^s/i.test(j.config.postulaciones_abiertas) ? 'SI' : 'NO');
+  pintar('swRelev', /^n/i.test(j.config.relevamiento_abierto || '') ? 'NO' : 'SI');
   if (j.planilla) $('lPlanilla').href = j.planilla;
   if (j.consultas != null) $('nCons').textContent = j.consultas;
   $('login').hidden = true; $('panel').hidden = false;
 }
-document.querySelectorAll('.switch button').forEach(function(b){ b.onclick = function(){ pintarEstado(b.dataset.v); }; });
+function error(el, err){ el.className = 'msg err'; el.textContent = err.message === 'Failed to fetch' ? 'No se pudo conectar con el script. Revisá que esté implementado para "Cualquier usuario".' : err.message; }
 
+/* Ingreso con Google */
+function conGoogle(s){
+  if (!s.administra) { $('gmsg').textContent = 'Tu cuenta (' + s.email + ') puede ver el tablero, pero no administrar el sitio.'; return; }
+  modo = 'google'; $('gmsg').textContent = 'Verificando…';
+  llamar({ accion:'login' }).then(function(j){
+    if (!j.ok) { if (j.vencida) { PDAcceso.salir(); location.reload(); return; } throw new Error(j.error || 'No autorizado'); }
+    $('gmsg').textContent = ''; $('quien').textContent = s.email; cargar(j);
+  }).catch(function(e){ error($('gmsg'), e); });
+}
+var guardada = PDAcceso.sesion();
+if (guardada && guardada.administra) conGoogle(guardada);
+else PDAcceso.boton($('gbtn'), conGoogle, function(m){ $('gmsg').textContent = m; });
+
+/* Ingreso con contraseña (temporal, no se guarda en el navegador) */
 $('fLogin').onsubmit = function(e){
-  e.preventDefault(); usuario = $('usuario').value.trim().toLowerCase(); clave = $('clave').value; $('mLogin').className = 'msg'; $('mLogin').textContent = 'Verificando…'; $('bLogin').disabled = true;
+  e.preventDefault(); modo = 'clave'; usuario = $('usuario').value.trim().toLowerCase(); clave = $('clave').value;
+  $('mLogin').className = 'msg'; $('mLogin').textContent = 'Verificando…'; $('bLogin').disabled = true;
   llamar({ accion:'login' }).then(function(j){
     if (!j.ok) throw new Error(j.error || 'No se pudo ingresar');
-    try { sessionStorage.setItem('pdAdmin', JSON.stringify([usuario, clave])); } catch(x){}
     $('mLogin').textContent = ''; $('quien').textContent = usuario; cargar(j);
-  }).catch(function(err){ $('mLogin').className = 'msg err'; $('mLogin').textContent = err.message === 'Failed to fetch' ? 'No se pudo conectar con el script. Revisá que esté implementado para "Cualquier usuario".' : err.message; })
-    .then(function(){ $('bLogin').disabled = false; });
+  }).catch(function(err){ error($('mLogin'), err); }).then(function(){ $('bLogin').disabled = false; });
 };
 
 $('fCfg').onsubmit = function(e){
-  e.preventDefault(); var d = { accion:'guardar', postulaciones_abiertas: estado };
+  e.preventDefault(); var d = { accion:'guardar', postulaciones_abiertas: estado.swPost, relevamiento_abierto: estado.swRelev };
   CAMPOS.forEach(function(k){ d[k] = $(k).value.trim(); });
   $('bGuardar').disabled = true; $('mGuardar').className = 'msg'; $('mGuardar').textContent = 'Guardando…';
   llamar(d).then(function(j){
     if (!j.ok) throw new Error(j.error || 'No se pudo guardar');
     cargar(j); $('mGuardar').className = 'msg ok'; $('mGuardar').textContent = '✓ Guardado. El sitio ya muestra los cambios.';
-  }).catch(function(err){ $('mGuardar').className = 'msg err'; $('mGuardar').textContent = err.message; })
-    .then(function(){ $('bGuardar').disabled = false; });
+  }).catch(function(err){ error($('mGuardar'), err); }).then(function(){ $('bGuardar').disabled = false; });
 };
 
-$('bSalir').onclick = function(){ try { sessionStorage.removeItem('pdAdmin'); } catch(x){} location.reload(); };
-
-try { var c = JSON.parse(sessionStorage.getItem('pdAdmin') || 'null'); if (c) { $('usuario').value = c[0]; $('clave').value = c[1]; $('fLogin').requestSubmit ? $('fLogin').requestSubmit() : $('fLogin').onsubmit(new Event('submit')); } } catch(x){}
+$('bSalir').onclick = function(){ PDAcceso.salir(); clave = ''; location.reload(); };
 </script>
 </body>
 </html>
