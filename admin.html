@@ -38,6 +38,19 @@ input:focus,textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 
 .switch button{border:0;border-radius:10px;padding:12px 20px;font:900 15px Lato,sans-serif;cursor:pointer;background:transparent;color:var(--muted)}
 .switch button.on.si{background:var(--green);color:#fff}
 .switch button.on.no{background:var(--red);color:#fff}
+.kp{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kp div{background:var(--light);border-radius:12px;padding:14px}
+.kp b{display:block;font-size:28px;font-variant-numeric:tabular-nums;line-height:1.1}
+.kp span{font-size:11.5px;letter-spacing:1.2px;font-weight:900;color:var(--muted);text-transform:uppercase}
+.ejes{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;margin-top:14px}
+.ejes div{border-radius:10px;padding:10px 6px;text-align:center;font-size:11.5px;font-weight:700;background:var(--light);color:var(--muted)}
+.ejes div b{display:block;font-size:20px;color:var(--navy)}
+.acc{width:100%;border-collapse:collapse;font-size:14px;margin-top:12px}
+.acc td,.acc th{padding:8px 6px;border-top:1px solid var(--line);text-align:left}
+.acc th{font-size:11.5px;letter-spacing:1.2px;color:var(--muted)}
+.acc button{background:none;border:0;color:var(--red);font-weight:700;cursor:pointer}
+.pill{display:inline-block;border-radius:999px;padding:2px 9px;font-size:12px;font-weight:700;background:var(--light)}
+@media(max-width:700px){.kp{grid-template-columns:repeat(2,minmax(0,1fr))}.ejes{grid-template-columns:repeat(4,minmax(0,1fr))}}
 .stat{display:flex;gap:14px;align-items:center;background:var(--light);border-radius:12px;padding:14px 16px}
 .stat b{font-size:28px;font-variant-numeric:tabular-nums}
 @media(max-width:700px){.grid{grid-template-columns:1fr}.nums{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -69,6 +82,28 @@ input:focus,textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 
       <h2>Consultas recibidas</h2>
       <p class="hint">Las consultas del formulario se guardan en la pestaña "Consultas" de la planilla Plan Dual y llegan por email al equipo técnico.</p>
       <div class="row"><div class="stat"><b id="nCons">0</b><span>consultas registradas</span></div><a class="btn ln" id="lPlanilla" href="#" target="_blank" rel="noopener">Abrir la planilla →</a></div>
+    </section>
+
+    <section class="card" id="cEst">
+      <h2>📊 Estadísticas del relevamiento</h2>
+      <p class="hint">Resumen en vivo de la consulta para la normativa. El tablero completo muestra el detalle por eje, lo que escribió cada sector y permite descargar el informe.</p>
+      <div class="kp"><div><span>Respuestas</span><b id="eTot">—</b></div><div><span>Escuelas</span><b id="eEsc">—</b></div><div><span>Participación 7°</span><b id="ePart">—</b></div><div><span>Recomiendan</span><b id="eRec">—</b></div></div>
+      <p class="hint" id="eRoles" style="margin:12px 0 0"></p>
+      <div class="ejes" id="eEjes"></div>
+      <div class="row" style="margin-top:16px"><a class="btn nv" href="tablero.html">Abrir el tablero completo →</a><a class="btn ln" href="consulta.html" target="_blank" rel="noopener">Ver la consulta</a><button type="button" class="btn ln" id="eCopiar">Copiar enlace de la consulta</button><span class="msg" id="eMsg"></span></div>
+    </section>
+
+    <section class="card" id="cComp">
+      <h2>🔐 Compartir el tablero</h2>
+      <p class="hint">Solo pueden ver el tablero las cuentas de esta lista. Al compartir, la persona recibe un email con el enlace; para entrar escribe su Gmail y recibe un código de un solo uso.</p>
+      <form id="fComp" class="grid">
+        <div><label for="cEmail">Gmail de la persona</label><input id="cEmail" type="email" required placeholder="nombre@gmail.com"></div>
+        <div><label for="cNombre">Nombre o área</label><input id="cNombre" placeholder="Ej.: Subsecretaría"></div>
+        <div class="row"><label style="display:flex;gap:8px;align-items:center;text-transform:none;letter-spacing:0;font-size:14px;margin:0"><input type="checkbox" id="cAdm" style="width:auto"> También puede administrar el sitio</label></div>
+        <div><button class="btn" id="cBtn">Compartir y enviar invitación</button></div>
+      </form>
+      <p class="msg" id="cMsg"></p>
+      <div style="overflow-x:auto"><table class="acc"><thead><tr><th>CUENTA</th><th>NOMBRE O ÁREA</th><th>PERMISO</th><th></th></tr></thead><tbody id="cLista"><tr><td colspan="4" class="hint">Cargando…</td></tr></tbody></table></div>
     </section>
 
     <form id="fCfg" style="display:grid;gap:20px">
@@ -120,6 +155,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 
 
 <script src="assets/config.js"></script>
 <script src="assets/acceso.js"></script>
+<script src="assets/preguntas.js"></script>
 <script>
 var CAMPOS = ['ciclo','fecha_cierre','url_formulario','mensaje_cerrado','relevamiento_cierre','escuelas','empresas','estudiantes','localidades','especialidades'];
 var modo = '', usuario = '', clave = '', estado = { swPost: 'NO', swRelev: 'SI' };
@@ -153,7 +189,7 @@ function conGoogle(s){
   modo = 'google'; $('gmsg').textContent = 'Verificando…';
   llamar({ accion:'login' }).then(function(j){
     if (!j.ok) { if (j.vencida) { PDAcceso.salir(); location.reload(); return; } throw new Error(j.error || 'No autorizado'); }
-    $('gmsg').textContent = ''; $('quien').textContent = s.email; cargar(j);
+    $('gmsg').textContent = ''; $('quien').textContent = s.email; cargar(j); estadisticas(); accesos();
   }).catch(function(e){ error($('gmsg'), e); });
 }
 var guardada = PDAcceso.sesion();
@@ -178,6 +214,67 @@ $('fCfg').onsubmit = function(e){
     if (!j.ok) throw new Error(j.error || 'No se pudo guardar');
     cargar(j); $('mGuardar').className = 'msg ok'; $('mGuardar').textContent = '✓ Guardado. El sitio ya muestra los cambios.';
   }).catch(function(err){ error($('mGuardar'), err); }).then(function(){ $('bGuardar').disabled = false; });
+};
+
+/* ---------- Estadísticas ---------- */
+function esc(t){ return String(t == null ? '' : t).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function estadisticas(){
+  if (modo !== 'google') { $('cEst').hidden = true; $('cComp').hidden = true; return; }
+  PDAcceso.llamar({ accion:'tablero' }).then(function(j){
+    if (!j.ok) throw new Error(j.error || 'No se pudieron leer las estadísticas');
+    var R = window.RELEV, resp = j.respuestas, datos = j.datos, rol = {}, ids = {};
+    resp.forEach(function(r){ ids[r.id] = r; rol[r.rol] = (rol[r.rol]||0) + 1; });
+    $('eTot').textContent = resp.length;
+    var esc_ = {}; resp.forEach(function(r){ esc_[r.escuela] = 1; }); $('eEsc').textContent = Object.keys(esc_).length;
+    var e7 = 0, pa = 0, rec = 0, recN = 0, por = {};
+    datos.forEach(function(d){
+      if (d[1] === 'DIR_EST7') e7 += +d[2] || 0; if (d[1] === 'DIR_PART') pa += +d[2] || 0;
+      if (d[1] === 'EST_REC' || d[1] === 'FAM_REC') { recN++; if (d[2] === 'Sí') rec++; }
+      var q = R.IDX[d[1]]; if (q && q.tipo === 'escala') { (por[q.eje] = por[q.eje] || []).push(+d[2]); }
+    });
+    $('ePart').textContent = e7 ? Math.round(100 * pa / e7) + '%' : '—';
+    $('eRec').textContent = recN ? Math.round(100 * rec / recN) + '%' : '—';
+    $('eRoles').textContent = Object.keys(R.ROLES).map(function(k){ return R.ROLES[k].icono + ' ' + R.ROLES[k].nombre + ': ' + (rol[k]||0); }).join('   ·   ');
+    $('eEjes').innerHTML = Object.keys(R.EJES).map(function(e){
+      var v = por[e]; if (!v || !v.length) return '<div><b>—</b>' + esc(R.EJES[e].nombre) + '</div>';
+      var p = v.reduce(function(a,b){ return a+b; }, 0) / v.length;
+      var bg = p < 2.5 ? 'hsl(4,70%,86%)' : p < 3.5 ? 'hsl(42,85%,84%)' : 'hsl(120,40%,82%)';
+      return '<div style="background:' + bg + '"><b>' + p.toFixed(1).replace('.', ',') + '</b>' + esc(R.EJES[e].nombre) + '</div>';
+    }).join('');
+  }).catch(function(e){ $('eMsg').className = 'msg err'; $('eMsg').textContent = e.message; });
+}
+$('eCopiar').onclick = function(){
+  var url = new URL('consulta.html', location.href).href;
+  (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(function(){ $('eMsg').className = 'msg ok'; $('eMsg').textContent = '✓ Enlace copiado: ' + url; })
+    .catch(function(){ $('eMsg').className = 'msg'; $('eMsg').textContent = url; });
+};
+
+/* ---------- Compartir el tablero ---------- */
+function pintarAccesos(j){
+  if (!j.ok) throw new Error(j.error || 'No se pudo leer la lista');
+  $('cLista').innerHTML = j.accesos.map(function(a){
+    var perm = a.administra ? 'Tablero + administra' : (a.tablero ? 'Ve el tablero' : 'Sin acceso');
+    return '<tr><td>' + esc(a.email) + '</td><td>' + esc(a.nombre) + '</td><td><span class="pill">' + perm + '</span></td><td>' +
+      (a.email === j.yo ? '<span class="hint">vos</span>' : '<button type="button" data-q="' + esc(a.email) + '">Quitar</button>') + '</td></tr>';
+  }).join('') || '<tr><td colspan="4" class="hint">Sin cuentas</td></tr>';
+  document.querySelectorAll('#cLista button[data-q]').forEach(function(b){
+    b.onclick = function(){
+      if (b.dataset.ok !== '1') { b.dataset.ok = '1'; b.textContent = '¿Confirmar?'; return; }
+      b.disabled = true; PDAcceso.llamar({ accion:'quitarAcceso', email: b.dataset.q }).then(pintarAccesos).catch(function(e){ $('cMsg').className = 'msg err'; $('cMsg').textContent = e.message; });
+    };
+  });
+}
+function accesos(){
+  if (modo !== 'google') return;
+  PDAcceso.llamar({ accion:'accesos' }).then(pintarAccesos).catch(function(e){ $('cMsg').className = 'msg err'; $('cMsg').textContent = e.message; });
+}
+$('fComp').onsubmit = function(e){
+  e.preventDefault(); var em = $('cEmail').value.trim().toLowerCase();
+  $('cBtn').disabled = true; $('cMsg').className = 'msg'; $('cMsg').textContent = 'Compartiendo…';
+  PDAcceso.llamar({ accion:'compartir', email: em, nombre: $('cNombre').value.trim(), administra: $('cAdm').checked ? 'SI' : 'NO' }).then(function(j){
+    pintarAccesos(j); $('cMsg').className = 'msg ok'; $('cMsg').textContent = '✓ Listo: ' + em + ' ya puede ver el tablero y recibió la invitación por email.';
+    $('cEmail').value = ''; $('cNombre').value = ''; $('cAdm').checked = false;
+  }).catch(function(e){ $('cMsg').className = 'msg err'; $('cMsg').textContent = e.message; }).then(function(){ $('cBtn').disabled = false; });
 };
 
 $('bSalir').onclick = function(){ PDAcceso.salir(); clave = ''; location.reload(); };

@@ -76,6 +76,7 @@ details.eje summary small{display:block;color:var(--muted);font-size:13px;font-f
 .cita small{display:block;color:var(--muted);font-size:12px;margin-top:4px}
 .vacio{color:var(--muted);font-size:14px}
 .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+@media print{.band,header.top,.filtros .btn,#login{display:none!important}body{background:#fff}.card{box-shadow:none;break-inside:avoid}details.eje{display:block}details.eje>*{display:block}main{margin:0;max-width:none}}
 @media(max-width:860px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.grid2{grid-template-columns:1fr}.stack,.bar{grid-template-columns:1fr 40px}.stack>div:first-child,.bar>div:first-child{grid-column:1/-1}}
 </style>
 </head>
@@ -97,7 +98,7 @@ details.eje summary small{display:block;color:var(--muted);font-size:13px;font-f
       <div class="filtros">
         <div><label for="fRol">ROL</label><select id="fRol"><option value="">Todos los roles</option></select></div>
         <div><label for="fEsc">ESCUELA</label><select id="fEsc"><option value="">Todas las escuelas</option></select></div>
-        <div style="margin-left:auto;display:flex;gap:8px;flex-wrap:wrap"><button class="btn ln sm" id="recargar">↻ Actualizar</button><button class="btn sm" id="csv">⬇ Descargar CSV</button></div>
+        <div style="margin-left:auto;display:flex;gap:8px;flex-wrap:wrap"><button class="btn ln sm" id="recargar">↻ Actualizar</button><button class="btn ln sm" id="pdf">🖨 Informe PDF</button><button class="btn sm" id="csv">⬇ Descargar CSV</button></div>
       </div>
     </section>
 
@@ -269,6 +270,13 @@ details.eje summary small{display:block;color:var(--muted);font-size:13px;font-f
     }
     return '<div class="qb">'+cab+h+'</div>';
   }
+
+  $('pdf').onclick = function(){
+    var abiertos = [];
+    document.querySelectorAll('details.eje').forEach(function(d){ if (!d.open) { abiertos.push(d); d.open = true; } });
+    window.print();
+    setTimeout(function(){ abiertos.forEach(function(d){ d.open = false; }); }, 500);
+  };
 
   /* ---------- CSV ---------- */
   $('csv').onclick = function(){
