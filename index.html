@@ -735,9 +735,24 @@ form.addEventListener('submit',function(e){
 </script>
 <script>
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function(){});
-(function(){ var ev = null, b = document.getElementById('btnInstalar');
-  window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); ev = e; if (b) b.hidden = false; });
-  if (b) b.onclick = function(){ if (ev) { ev.prompt(); ev = null; b.hidden = true; } };
+(function(){
+  var ev = null, b = document.getElementById('btnInstalar');
+  var st = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+  var ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  var f = document.createElement('button');
+  f.type = 'button'; f.id = 'fabInstalar'; f.hidden = true; f.textContent = '📲 Descargar la app';
+  f.style.cssText = 'position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:9999;background:#C55A11;color:#fff;border:0;border-radius:99px;padding:14px 20px;font:900 15px Lato,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.25);cursor:pointer';
+  document.body.appendChild(f);
+  function instalar(){
+    if (ev) { ev.prompt(); ev.userChoice.then(function(){ ev = null; f.hidden = true; if (b) b.hidden = true; }); return; }
+    alert(ios ? 'En iPhone: tocá el botón Compartir (cuadrado con flecha) y elegí «Agregar a inicio».'
+              : 'Abrí el menú ⋮ de Chrome y elegí «Instalar app» o «Agregar a la pantalla principal».');
+  }
+  window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); ev = e; if (!st) { f.hidden = false; if (b) b.hidden = false; } });
+  if (!st && ios) { f.hidden = false; if (b) b.hidden = false; }
+  if (location.hash === '#instalar' && !st) { f.hidden = false; if (b) b.hidden = false; }
+  f.onclick = instalar; if (b) b.onclick = instalar;
+  window.addEventListener('appinstalled', function(){ f.hidden = true; if (b) b.hidden = true; });
 })();
 </script>
 </body>
