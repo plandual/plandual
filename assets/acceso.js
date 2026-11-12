@@ -31,11 +31,17 @@ window.PDAcceso = (function () {
 
   /** Dibuja el acceso dentro de `el`: botón de Google (si está configurado)
    *  y, siempre, ingreso con un código que llega al Gmail de la persona. */
-  function boton(el, alEntrar, alError) {
+  function boton(el, alEntrar, alError, para) {
     function ok(j) {
       if (!j.ok) throw new Error(j.error || 'No autorizado');
       guardar({ ses: j.ses, email: j.email, nombre: j.nombre, tablero: j.tablero, administra: j.administra });
       alEntrar(leer());
+    }
+    if (PD.GOOGLE_CLIENT_ID) {
+      // Solo Google: la cuenta la verifica Google, no se piden códigos ni contraseñas.
+      el.innerHTML = '<div style="display:grid;gap:10px;justify-items:center;width:100%"><div id="pdG"></div>' +
+        '<div style="color:#5A6685;font-size:12.5px;text-align:center;max-width:340px">Ingresá con tu cuenta de Gmail. Google confirma tu identidad: no hay códigos ni contraseñas.</div></div>';
+      return cargarGoogle();
     }
     el.innerHTML =
       '<div style="display:grid;gap:12px;width:100%;max-width:360px;margin:0 auto;text-align:left">' +
@@ -65,12 +71,14 @@ window.PDAcceso = (function () {
     el.querySelector('#pdOtro').onclick = function () { f2.hidden = true; f1.hidden = false; alError(''); };
 
     if (!PD.GOOGLE_CLIENT_ID) return;
+    cargarGoogle();
+    function cargarGoogle() {
     function init() {
       google.accounts.id.initialize({
         client_id: PD.GOOGLE_CLIENT_ID, ux_mode: 'popup', auto_select: false,
         callback: function (resp) {
           alError('');
-          post({ accion: 'loginGoogle', id_token: resp.credential }).then(ok).catch(function (e) { alError(e.message); });
+          post({ accion: 'loginGoogle', id_token: resp.credential, para: para || '' }).then(ok).catch(function (e) { alError(e.message); });
         }
       });
       google.accounts.id.renderButton(el.querySelector('#pdG'), { theme: 'filled_blue', size: 'large', text: 'signin_with', shape: 'pill', locale: 'es', width: 300 });
@@ -79,6 +87,7 @@ window.PDAcceso = (function () {
     var sc = document.createElement('script');
     sc.src = 'https://accounts.google.com/gsi/client'; sc.async = true; sc.defer = true; sc.onload = init;
     document.head.appendChild(sc);
+    }
   }
 
   function salir() {

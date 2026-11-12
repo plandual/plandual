@@ -86,6 +86,9 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:0 16px 40px}
 @media(max-width:700px){.why,.grid2{grid-template-columns:1fr}.esc label span{display:none}.nm td{display:block;border:0;padding:4px 0}.nm tr{display:block;border-top:1px solid var(--line);padding:8px 0}.nm .opts{justify-content:flex-start}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1B2E5E">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
 </head>
 <body>
 <div class="band" aria-hidden="true"></div>
@@ -192,6 +195,18 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:0 16px 40px}
     }
   }).catch(function(){});
 
+  /* Opciones que habilitan un campo de escritura ("Otro", "Combinado o variable"…) */
+  var RX_OTRO = /^(otr[oa]s?|combinado o variable|variable)$/i;
+  function esOtro(q, o){ return (q.otro && q.otro.indexOf(o) > -1) || RX_OTRO.test(o); }
+  function conOtro(q){ return q.ops.some(function(o){ return esOtro(q, o); }); }
+  document.addEventListener('change', function(e){
+    var el = e.target; if (!el.name || !/^q_/.test(el.name) || (el.type !== 'radio' && el.type !== 'checkbox')) return;
+    var q = R.IDX[el.name.slice(2)]; if (!q || !q.ops) return;
+    var t = document.querySelector('[name="'+el.name+'_otro"]'); if (!t) return;
+    var on = [].some.call(document.querySelectorAll('input[name="'+el.name+'"]:checked'), function(i){ return esOtro(q, i.value); });
+    t.hidden = !on; if (on) t.focus(); else t.value = '';
+  });
+
   /* Render de preguntas */
   function htmlPregunta(q){
     var t = '<div class="t"><span>'+esc(q.txt)+(q.req?' <span class="req">*</span>':'')+'</span><span class="eje" title="'+esc(R.EJES[q.eje].nombre)+'">'+esc(R.EJES[q.eje].nombre)+'</span></div>';
@@ -200,7 +215,8 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:0 16px 40px}
       h = '<div class="esc" role="radiogroup">' + R.ESCALA.map(function(lbl,i){ return '<label><input type="radio" name="'+n+'" value="'+(i+1)+'"><b>'+(i+1)+'</b><span>'+lbl+'</span></label>'; }).join('') + '</div>';
     } else if (q.tipo === 'opcion' || q.tipo === 'multi') {
       var tp = q.tipo === 'opcion' ? 'radio' : 'checkbox';
-      h = '<div class="ops">' + q.ops.map(function(o){ return '<label><input type="'+tp+'" name="'+n+'" value="'+esc(o)+'">'+esc(o)+'</label>'; }).join('') + '</div>';
+      h = '<div class="ops">' + q.ops.map(function(o){ return '<label><input type="'+tp+'" name="'+n+'" value="'+esc(o)+'">'+esc(o)+'</label>'; }).join('') + '</div>' +
+        (conOtro(q) ? '<input type="text" class="otroTxt" name="'+n+'_otro" maxlength="300" placeholder="Especificá…" hidden style="margin-top:8px">' : '');
     } else if (q.tipo === 'numero') {
       h = '<input type="number" name="'+n+'" min="0" max="5000" inputmode="numeric" style="max-width:180px">';
     } else if (q.tipo === 'texto') {
@@ -242,8 +258,10 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:0 16px 40px}
         return;
       }
       var n = 'q_'+q.id;
-      if (q.tipo === 'escala' || q.tipo === 'opcion') { var c = document.querySelector('input[name="'+n+'"]:checked'); if (c) out[q.id] = c.value; }
-      else if (q.tipo === 'multi') { var v = [].map.call(document.querySelectorAll('input[name="'+n+'"]:checked'), function(i){ return i.value; }); if (v.length) out[q.id] = v.join(' | '); }
+      var ot = document.querySelector('[name="'+n+'_otro"]'), otv = ot && !ot.hidden ? ot.value.trim() : '';
+      var conTxt = function(v){ return otv && esOtro(q, v) ? v + ': ' + otv : v; };
+      if (q.tipo === 'escala' || q.tipo === 'opcion') { var c = document.querySelector('input[name="'+n+'"]:checked'); if (c) out[q.id] = conTxt(c.value); }
+      else if (q.tipo === 'multi') { var v = [].map.call(document.querySelectorAll('input[name="'+n+'"]:checked'), function(i){ return conTxt(i.value); }); if (v.length) out[q.id] = v.join(' | '); }
       else { var el = document.querySelector('[name="'+n+'"]'); if (el && el.value.trim()) out[q.id] = el.value.trim(); }
     });
     return out;
@@ -285,5 +303,6 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:0 16px 40px}
   });
 })();
 </script>
+<script>if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(function(){});</script>
 </body>
 </html>

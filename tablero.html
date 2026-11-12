@@ -79,6 +79,9 @@ details.eje summary small{display:block;color:var(--muted);font-size:13px;font-f
 @media print{.band,header.top,.filtros .btn,#login{display:none!important}body{background:#fff}.card{box-shadow:none;break-inside:avoid}details.eje{display:block}details.eje>*{display:block}main{margin:0;max-width:none}}
 @media(max-width:860px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.grid2{grid-template-columns:1fr}.stack,.bar{grid-template-columns:1fr 40px}.stack>div:first-child,.bar>div:first-child{grid-column:1/-1}}
 </style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1B2E5E">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
 </head>
 <body>
 <div class="band" aria-hidden="true"></div>
@@ -106,7 +109,7 @@ details.eje summary small{display:block;color:var(--muted);font-size:13px;font-f
       <div class="kpis">
         <div class="kpi"><div class="l">Respuestas</div><div class="v" id="kTot">0</div><small id="kUlt"></small></div>
         <div class="kpi"><div class="l">Escuelas con respuestas</div><div class="v" id="kEsc">0</div><small id="kEscT"></small></div>
-        <div class="kpi"><div class="l">Participación de 7° año</div><div class="v" id="kPart">—</div><small id="kPartT">según directivos</small></div>
+        <div class="kpi"><div class="l">En condiciones de acreditar</div><div class="v" id="kPart">—</div><small id="kPartT">según directivos</small></div>
         <div class="kpi"><div class="l">Recomendarían el Plan</div><div class="v" id="kRec">—</div><small>estudiantes y familias</small></div>
       </div>
       <div class="chips" id="kRoles"></div>
@@ -198,9 +201,9 @@ details.eje summary small{display:block;color:var(--muted);font-size:13px;font-f
     var escs = {}; resp.forEach(function(r){ escs[r.escuela] = 1; });
     $('kEsc').textContent = Object.keys(escs).length;
     $('kEscT').textContent = 'escuelas distintas';
-    var e7 = 0, pa = 0; datos.forEach(function(d){ if (d.c === 'DIR_EST7') e7 += +d.v || 0; if (d.c === 'DIR_PART') pa += +d.v || 0; });
+    var e7 = 0, pa = 0; datos.forEach(function(d){ if (d.c === 'DIR_PART') e7 += +d.v || 0; if (d.c === 'DIR_ACR') pa += +d.v || 0; });
     $('kPart').textContent = e7 ? fmt(100 * pa / e7, 0) + '%' : '—';
-    $('kPartT').textContent = e7 ? pa + ' de ' + e7 + ' estudiantes (según directivos)' : 'según directivos';
+    $('kPartT').textContent = e7 ? pa + ' de ' + e7 + ' participantes en condiciones de acreditar (según directivos)' : 'según directivos';
     var rs = datos.filter(function(d){ return d.c === 'EST_REC' || d.c === 'FAM_REC'; });
     $('kRec').textContent = rs.length ? fmt(100 * rs.filter(function(d){ return d.v === 'Sí'; }).length / rs.length, 0) + '%' : '—';
     var porRol = {}; resp.forEach(function(r){ porRol[r.rol] = (porRol[r.rol] || 0) + 1; });
@@ -289,5 +292,6 @@ details.eje summary small{display:block;color:var(--muted);font-size:13px;font-f
   };
 })();
 </script>
+<script>if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(function(){});</script>
 </body>
 </html>

@@ -273,6 +273,9 @@ footer b{color:#fff}
 }
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.reveal{opacity:1;transform:none;transition:none}}
 </style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1B2E5E">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
 </head>
 <body>
 
@@ -292,6 +295,7 @@ footer b{color:#fff}
       <a href="#normativa">Normativa</a>
       <a href="#postulacion">Postulación <span data-cfg="ciclo">2027</span></a>
       <a href="consulta.html">Relevamiento</a>
+      <a href="certificacion.html">Certificación</a>
       <a href="#preguntas">Preguntas</a>
       <a href="#contacto" class="btn btn-or" style="padding:8px 16px;color:#fff">Consultanos</a>
     </nav>
@@ -313,6 +317,7 @@ footer b{color:#fff}
         <a class="btn btn-or" href="#escuelas-empresas" data-tab="escuelas">Soy escuela técnica</a>
         <a class="btn btn-ln" href="#escuelas-empresas" data-tab="empresas">Soy empresa</a>
         <a class="btn btn-ln" href="consulta.html">📝 Completar la consulta</a>
+        <a class="btn btn-ln" href="certificacion.html">🎓 Cargar estudiantes a certificar</a>
       </div>
     </div>
     <div class="quote journey">
@@ -538,6 +543,14 @@ footer b{color:#fff}
       <div><div class="kicker" style="color:var(--orange2)">Relevamiento 2026</div><b style="font-size:22px;font-family:Lora,Georgia,serif">Construyamos juntos la normativa del Plan Dual</b><p>El Plan se implementó primero para después legislar sobre la experiencia. Directivos, docentes, empresas, estudiantes y familias: tu mirada es la base de la futura norma.</p></div>
       <a class="btn btn-or" href="consulta.html">Responder la consulta →</a>
     </div>
+    <div class="legal-cta reveal">
+      <div><div class="kicker" style="color:var(--orange2)">Para directivos</div><b style="font-size:22px;font-family:Lora,Georgia,serif">Certificación de estudiantes Plan Dual</b><p>Cargá a los estudiantes de tu escuela que están en condiciones de recibir la certificación del Plan Dual. Ingresás con tu cuenta de Gmail y podés editar o eliminar lo que cargaste.</p></div>
+      <a class="btn btn-or" href="certificacion.html">Cargar estudiantes →</a>
+    </div>
+    <div class="legal-cta reveal" id="instalar">
+      <div><div class="kicker" style="color:var(--orange2)">App en el celular</div><b style="font-size:22px;font-family:Lora,Georgia,serif">Instalá Plan Dual en tu teléfono</b><p>Android (Chrome): menú ⋮ › <b>Instalar app</b> o <b>Agregar a la pantalla principal</b>. iPhone (Safari): botón Compartir › <b>Agregar a inicio</b>.</p></div>
+      <button class="btn btn-or" id="btnInstalar" type="button" hidden>📲 Instalar la app</button>
+    </div>
   </div>
 </section>
 
@@ -719,6 +732,13 @@ form.addEventListener('submit',function(e){
     .catch(function(){ msg.textContent='No pudimos enviar la consulta. Revisá tu conexión e intentá de nuevo.'; msg.className='msg err'; })
     .then(function(){ btn.disabled=false; btn.textContent='Enviar consulta'; });
 });
+</script>
+<script>
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function(){});
+(function(){ var ev = null, b = document.getElementById('btnInstalar');
+  window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); ev = e; if (b) b.hidden = false; });
+  if (b) b.onclick = function(){ if (ev) { ev.prompt(); ev = null; b.hidden = true; } };
+})();
 </script>
 </body>
 </html>

@@ -55,6 +55,9 @@ input:focus,textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 
 .stat b{font-size:28px;font-variant-numeric:tabular-nums}
 @media(max-width:700px){.grid{grid-template-columns:1fr}.nums{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1B2E5E">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
 </head>
 <body>
 <div class="band" aria-hidden="true"></div>
@@ -84,10 +87,16 @@ input:focus,textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 
       <div class="row"><div class="stat"><b id="nCons">0</b><span>consultas registradas</span></div><a class="btn ln" id="lPlanilla" href="#" target="_blank" rel="noopener">Abrir la planilla →</a></div>
     </section>
 
+    <section class="card" id="cCert">
+      <h2>🎓 Certificación de estudiantes Plan Dual</h2>
+      <p class="hint">Estudiantes cargados por cada directivo/a. Como administrador/a ves todas las escuelas, podés corregir o eliminar registros y descargar el listado completo.</p>
+      <a class="btn" href="certificacion.html">Ver y descargar la certificación →</a>
+    </section>
+
     <section class="card" id="cEst">
       <h2>📊 Estadísticas del relevamiento</h2>
       <p class="hint">Resumen en vivo de la consulta para la normativa. El tablero completo muestra el detalle por eje, lo que escribió cada sector y permite descargar el informe.</p>
-      <div class="kp"><div><span>Respuestas</span><b id="eTot">—</b></div><div><span>Escuelas</span><b id="eEsc">—</b></div><div><span>Participación 7°</span><b id="ePart">—</b></div><div><span>Recomiendan</span><b id="eRec">—</b></div></div>
+      <div class="kp"><div><span>Respuestas</span><b id="eTot">—</b></div><div><span>Escuelas</span><b id="eEsc">—</b></div><div><span>Acreditan</span><b id="ePart">—</b></div><div><span>Recomiendan</span><b id="eRec">—</b></div></div>
       <p class="hint" id="eRoles" style="margin:12px 0 0"></p>
       <div class="ejes" id="eEjes"></div>
       <div class="row" style="margin-top:16px"><a class="btn nv" href="tablero.html">Abrir el tablero completo →</a><a class="btn ln" href="consulta.html" target="_blank" rel="noopener">Ver la consulta</a><button type="button" class="btn ln" id="eCopiar">Copiar enlace de la consulta</button><span class="msg" id="eMsg"></span></div>
@@ -228,7 +237,7 @@ function estadisticas(){
     var esc_ = {}; resp.forEach(function(r){ esc_[r.escuela] = 1; }); $('eEsc').textContent = Object.keys(esc_).length;
     var e7 = 0, pa = 0, rec = 0, recN = 0, por = {};
     datos.forEach(function(d){
-      if (d[1] === 'DIR_EST7') e7 += +d[2] || 0; if (d[1] === 'DIR_PART') pa += +d[2] || 0;
+      if (d[1] === 'DIR_PART') e7 += +d[2] || 0; if (d[1] === 'DIR_ACR') pa += +d[2] || 0;
       if (d[1] === 'EST_REC' || d[1] === 'FAM_REC') { recN++; if (d[2] === 'Sí') rec++; }
       var q = R.IDX[d[1]]; if (q && q.tipo === 'escala') { (por[q.eje] = por[q.eje] || []).push(+d[2]); }
     });
@@ -279,5 +288,6 @@ $('fComp').onsubmit = function(e){
 
 $('bSalir').onclick = function(){ PDAcceso.salir(); clave = ''; location.reload(); };
 </script>
+<script>if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(function(){});</script>
 </body>
 </html>

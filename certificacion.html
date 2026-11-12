@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Certificación de estudiantes · Plan Dual · DGETyFP</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1B2E5E">
+<link rel="icon" href="assets/icon-192.png">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1B2E5E;--orange:#C55A11;--orange2:#E07B39;--green:#52A14D;--muted:#5A6685;--pale:#C9D4EE;--light:#F4F6FA;--line:#E3E8F2;--red:#C8102E}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;font-family:Lato,Calibri,Arial,sans-serif;color:var(--navy);background:var(--light);line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2{font-family:Lora,Georgia,serif;margin:0;line-height:1.2;text-wrap:balance}
+.band{height:46px;background:var(--green) url(assets/band.png) right center/auto 100% no-repeat}
+header{background:var(--navy);color:#fff}
+header .w{max-width:1180px;margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+header b{font-family:Lora,Georgia,serif;font-size:20px}
+header small{display:block;font-size:11px;letter-spacing:2.5px;color:var(--orange2);font-weight:900}
+header a{color:var(--pale);font-size:13.5px}
+.who{display:flex;gap:10px;align-items:center;font-size:13.5px;color:var(--pale);flex-wrap:wrap}
+main{max-width:1180px;margin:22px auto 60px;padding:0 16px;display:grid;gap:20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 30px rgba(27,46,94,.07);padding:clamp(16px,3vw,26px);min-width:0}
+h2{font-size:21px;margin-bottom:4px}
+.hint{color:var(--muted);font-size:14px;margin:0 0 16px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.grid .full{grid-column:1/-1}
+label.lb{display:block;font-size:11.5px;letter-spacing:1.3px;font-weight:900;color:var(--muted);margin-bottom:5px;text-transform:uppercase}
+input,select{font:inherit;color:inherit;width:100%;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff}
+input:focus,select:focus{outline:2px solid var(--orange2);border-color:transparent}
+.sn{display:flex;gap:8px}
+.sn label{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;border:1.5px solid var(--line);border-radius:10px;padding:10px;cursor:pointer;font-weight:700}
+.sn input{width:auto}
+.sn label:has(input:checked){border-color:var(--navy);background:#EEF2FA}
+.fija{background:var(--light);border-radius:12px;padding:14px;margin-bottom:14px}
+.fija p{margin:0 0 10px;font-size:13px;color:var(--muted)}
+.acts{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:16px}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#fff;border:0;border-radius:10px;padding:11px 18px;font:900 14px Lato,sans-serif;cursor:pointer;text-decoration:none}
+.btn.ln{background:#fff;color:var(--navy);border:1.5px solid var(--line)}
+.btn.sm{padding:6px 10px;font-size:12.5px}
+.btn:disabled{opacity:.6;cursor:wait}
+.msg{font-weight:700;font-size:14px}
+.msg.err{color:var(--red)}
+.msg.ok{color:var(--green)}
+.login{max-width:520px;margin:30px auto;text-align:center}
+.login .lock{font-size:46px}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--line);padding:8px 6px;white-space:nowrap}
+td{border-bottom:1px solid var(--line);padding:8px 6px;vertical-align:top}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.si{color:var(--green);font-weight:900}.no{color:var(--red);font-weight:900}
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:12px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{background:var(--light);border-radius:99px;padding:4px 12px;font-size:13px;font-weight:700}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="band" aria-hidden="true"></div>
+<header><div class="w">
+  <div><small>PLAN DUAL · DGETyFP</small><b>Certificación de estudiantes Plan Dual 2027</b></div>
+  <div class="who"><span id="quien"></span><button class="btn ln sm" id="salir" hidden>Salir</button><a href="./">← Volver al sitio</a></div>
+</div></header>
+
+<main>
+  <section class="card login" id="boxLogin">
+    <div class="lock">🎓</div>
+    <h2>Carga de estudiantes en condiciones de certificar</h2>
+    <p class="hint">Cada directivo/a ingresa con su cuenta de Gmail y carga a sus estudiantes. Solo vos (y el equipo de la DGETyFP) ven los datos que cargás.</p>
+    <div id="gbtn"></div>
+    <p class="msg err" id="lmsg"></p>
+  </section>
+
+  <section class="card" id="boxForm" hidden>
+    <h2 id="fTit">Agregar estudiante</h2>
+    <p class="hint">Los datos de la escuela quedan guardados: después de cada estudiante solo completás los datos del siguiente. Los campos con * son obligatorios.</p>
+    <form id="f" autocomplete="off">
+      <div class="fija">
+        <p>📌 Datos de la institución (se mantienen entre un estudiante y otro)</p>
+        <div class="grid">
+          <div><label class="lb" for="departamento">Departamento *</label><select id="departamento" required><option value="">Elegí…</option></select></div>
+          <div><label class="lb" for="localidad">Localidad *</label><input id="localidad" required maxlength="80" placeholder="Ej.: San Francisco"></div>
+          <div><label class="lb" for="institucion">Institución educativa *</label><input id="institucion" list="lEsc" required maxlength="120" placeholder="Escribí o elegí de la lista"></div>
+        </div>
+      </div>
+      <div class="grid">
+        <div><label class="lb" for="estudiante">Apellido y nombre del estudiante *</label><input id="estudiante" required maxlength="120" placeholder="PÉREZ, Juan Martín"></div>
+        <div><label class="lb" for="dni">DNI *</label><input id="dni" required inputmode="numeric" maxlength="10" placeholder="Solo números"></div>
+        <div><label class="lb" for="especialidad">Especialidad *</label><input id="especialidad" list="lEspec" required maxlength="100" placeholder="Ej.: Electromecánica"></div>
+        <div><label class="lb" for="empresa">Empresa Plan Dual</label><input id="empresa" list="lEmp" maxlength="120" placeholder="Razón social o nombre"></div>
+        <div><span class="lb">¿Cumple con el 80% de asistencia? *</span><div class="sn"><label><input type="radio" name="asistencia" value="Sí" required> Sí</label><label><input type="radio" name="asistencia" value="No"> No</label></div></div>
+        <div><span class="lb">¿Está en condiciones de acreditar el Plan Dual? *</span><div class="sn"><label><input type="radio" name="acredita" value="Sí" required> Sí</label><label><input type="radio" name="acredita" value="No"> No</label></div></div>
+      </div>
+      <div class="acts">
+        <button class="btn" id="guardar">Guardar estudiante</button>
+        <button type="button" class="btn ln" id="cancelar" hidden>Cancelar edición</button>
+        <span class="msg" id="fmsg" role="status"></span>
+      </div>
+    </form>
+    <datalist id="lEsc"></datalist><datalist id="lEspec"></datalist><datalist id="lEmp"></datalist>
+  </section>
+
+  <section class="card" id="boxLista" hidden>
+    <div class="tools">
+      <div><h2 id="lTit">Estudiantes cargados</h2><div class="chips" id="chips"></div></div>
+      <div class="acts" style="margin:0"><input id="buscar" placeholder="Buscar por nombre, DNI o escuela" style="min-width:240px"><button class="btn ln sm" id="csv">⬇ Descargar Excel (CSV)</button></div>
+    </div>
+    <div class="tw"><table><thead><tr id="thead"></tr></thead><tbody id="tb"></tbody></table></div>
+    <p class="hint" id="vacio" hidden style="margin-top:14px">Todavía no cargaste estudiantes.</p>
+  </section>
+</main>
+
+<script src="assets/config.js"></script>
+<script src="assets/preguntas.js"></script>
+<script src="assets/acceso.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var esc = function(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]; }); };
+  var DEPTOS = ['Calamuchita','Capital','Colón','Cruz del Eje','General Roca','General San Martín','Ischilín','Juárez Celman','Marcos Juárez','Minas','Pocho','Presidente Roque Sáenz Peña','Punilla','Río Cuarto','Río Primero','Río Seco','Río Segundo','San Alberto','San Javier','San Justo','Santa María','Sobremonte','Tercero Arriba','Totoral','Tulumba','Unión'];
+  var ESPEC = ['Electromecánica','Electrónica','Electricidad','Automotores','Mecánica','Maestro Mayor de Obras','Construcciones','Química','Industrias de procesos','Informática','Programación','Producción agropecuaria','Agroalimentos','Tecnología de los alimentos','Aeronáutica','Energías renovables','Equipos e instalaciones electromecánicas'];
+  var FIJOS = ['departamento','localidad','institucion'];
+  var filas = [], admin = false, editId = null;
+
+  $('departamento').innerHTML += DEPTOS.map(function(d){ return '<option>'+esc(d)+'</option>'; }).join('');
+  $('lEsc').innerHTML = (window.RELEV ? RELEV.ESCUELAS_BASE : []).map(function(e){ return '<option value="'+esc(e)+'">'; }).join('');
+  $('lEspec').innerHTML = ESPEC.map(function(e){ return '<option value="'+esc(e)+'">'; }).join('');
+  try { var g = JSON.parse(localStorage.getItem('pdCertFijos') || '{}'); FIJOS.forEach(function(k){ if (g[k]) $(k).value = g[k]; }); } catch(e){}
+
+  function entrar(s){
+    $('boxLogin').hidden = true; $('boxForm').hidden = false; $('boxLista').hidden = false; $('salir').hidden = false;
+    $('quien').textContent = s.email;
+    cargar();
+  }
+  function salir(msg){ PDAcceso.salir(); $('boxLogin').hidden = false; $('boxForm').hidden = true; $('boxLista').hidden = true; $('salir').hidden = true; $('quien').textContent = ''; $('lmsg').textContent = msg || ''; PDAcceso.boton($('gbtn'), entrar, function(m){ $('lmsg').textContent = m; }, 'cert'); }
+  $('salir').onclick = function(){ salir(''); };
+
+  function resp(j){
+    if (!j.ok) { if (j.vencida) salir('Tu sesión venció. Ingresá nuevamente.'); throw new Error(j.error || 'Error'); }
+    filas = j.filas || []; admin = !!j.admin; pintar(); return j;
+  }
+  function cargar(){ PDAcceso.llamar({ accion: 'certListar' }).then(resp).catch(function(e){ $('fmsg').className = 'msg err'; $('fmsg').textContent = e.message; }); }
+
+  var COLS = [['institucion','Institución'],['estudiante','Estudiante'],['dni','DNI'],['especialidad','Especialidad'],['empresa','Empresa'],['asistencia','80% asist.'],['acredita','Acredita']];
+  function pintar(){
+    var q = $('buscar').value.trim().toLowerCase();
+    var vis = filas.filter(function(f){ return !q || [f.estudiante, f.dni, f.institucion, f.localidad, f.empresa].join(' ').toLowerCase().indexOf(q) > -1; });
+    $('lTit').textContent = admin ? 'Todos los estudiantes cargados (vista de administración)' : 'Tus estudiantes cargados';
+    $('thead').innerHTML = (admin ? '<th>Departamento</th><th>Localidad</th>' : '') + COLS.map(function(c){ return '<th>'+c[1]+'</th>'; }).join('') + (admin ? '<th>Cargado por</th>' : '') + '<th></th>';
+    $('tb').innerHTML = vis.map(function(f){
+      return '<tr>' + (admin ? '<td>'+esc(f.departamento)+'</td><td>'+esc(f.localidad)+'</td>' : '') + COLS.map(function(c){
+        var v = f[c[0]], cl = c[0] === 'dni' ? ' class="num"' : (v === 'Sí' ? ' class="si"' : v === 'No' ? ' class="no"' : '');
+        return '<td'+cl+'>'+esc(v)+'</td>'; }).join('') + (admin ? '<td>'+esc(f.por)+'</td>' : '') +
+        '<td style="white-space:nowrap"><button class="btn ln sm" data-ed="'+esc(f.id)+'">Editar</button> <button class="btn ln sm" data-rm="'+esc(f.id)+'" style="color:var(--red)">Eliminar</button></td></tr>';
+    }).join('');
+    $('vacio').hidden = filas.length > 0;
+    var si = filas.filter(function(f){ return f.acredita === 'Sí'; }).length, esc_ = {};
+    filas.forEach(function(f){ esc_[f.institucion] = 1; });
+    $('chips').innerHTML = '<span class="chip">'+filas.length+' estudiantes</span><span class="chip">✅ '+si+' acreditan</span>' + (admin ? '<span class="chip">🏫 '+Object.keys(esc_).length+' escuelas</span>' : '');
+    var emp = {}; filas.forEach(function(f){ if (f.empresa) emp[f.empresa] = 1; });
+    $('lEmp').innerHTML = Object.keys(emp).map(function(e){ return '<option value="'+esc(e)+'">'; }).join('');
+  }
+  $('buscar').oninput = pintar;
+
+  $('tb').onclick = function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.ed) {
+      var f = filas.filter(function(x){ return x.id === b.dataset.ed; })[0]; if (!f) return;
+      editId = f.id;
+      ['departamento','localidad','institucion','estudiante','dni','especialidad','empresa'].forEach(function(k){ $(k).value = f[k] || ''; });
+      ['asistencia','acredita'].forEach(function(k){ var r = document.querySelector('input[name="'+k+'"][value="'+f[k]+'"]'); if (r) r.checked = true; });
+      $('fTit').textContent = 'Editar estudiante'; $('guardar').textContent = 'Guardar cambios'; $('cancelar').hidden = false;
+      $('boxForm').scrollIntoView({ behavior: 'smooth' }); $('estudiante').focus();
+    }
+    if (b.dataset.rm) {
+      if (b.dataset.sure !== '1') { b.dataset.sure = '1'; b.textContent = '¿Seguro? Tocá otra vez'; setTimeout(function(){ b.dataset.sure = ''; b.textContent = 'Eliminar'; }, 4000); return; }
+      b.disabled = true;
+      PDAcceso.llamar({ accion: 'certEliminar', id: b.dataset.rm }).then(resp).catch(function(e){ alertar(e.message, true); });
+    }
+  };
+
+  function limpiarEstudiante(){
+    editId = null; ['estudiante','dni','empresa'].forEach(function(k){ $(k).value = ''; });
+    document.querySelectorAll('.sn input').forEach(function(r){ r.checked = false; });
+    $('fTit').textContent = 'Agregar estudiante'; $('guardar').textContent = 'Guardar estudiante'; $('cancelar').hidden = true;
+  }
+  $('cancelar').onclick = limpiarEstudiante;
+  function alertar(m, err){ $('fmsg').className = 'msg ' + (err ? 'err' : 'ok'); $('fmsg').textContent = m; }
+
+  $('dni').addEventListener('input', function(){ this.value = this.value.replace(/\D/g, '').slice(0, 9); });
+  $('f').onsubmit = function(e){
+    e.preventDefault();
+    var d = { id: editId || '' };
+    ['departamento','localidad','institucion','estudiante','dni','especialidad','empresa'].forEach(function(k){ d[k] = $(k).value.trim(); });
+    ['asistencia','acredita'].forEach(function(k){ var r = document.querySelector('input[name="'+k+'"]:checked'); d[k] = r ? r.value : ''; });
+    if (d.dni.length < 7) return alertar('El DNI debe tener 7 u 8 números.', true);
+    try { var g = {}; FIJOS.forEach(function(k){ g[k] = d[k]; }); localStorage.setItem('pdCertFijos', JSON.stringify(g)); } catch(err){}
+    $('guardar').disabled = true; alertar('Guardando…');
+    var editando = !!editId;
+    PDAcceso.llamar({ accion: 'certGuardar', datos: JSON.stringify(d) }).then(resp).then(function(){
+      alertar(editando ? '✔ Cambios guardados.' : '✔ ' + d.estudiante + ' guardado. Podés cargar el siguiente.');
+      limpiarEstudiante(); $('estudiante').focus();
+    }).catch(function(e){ alertar(e.message, true); }).then(function(){ $('guardar').disabled = false; });
+  };
+
+  $('csv').onclick = function(){
+    var cab = ['Departamento','Localidad','Institución educativa','Apellido y nombre del estudiante','DNI','Especialidad','Empresa Plan Dual','Cumple con el 80% de asistencia','¿En condiciones de acreditar el Plan Dual?','Cargado por','Fecha de carga'];
+    var keys = ['departamento','localidad','institucion','estudiante','dni','especialidad','empresa','asistencia','acredita','por','fecha'];
+    var txt = '﻿' + [cab].concat(filas.map(function(f){ return keys.map(function(k){ return f[k]; }); }))
+      .map(function(r){ return r.map(function(v){ return '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"'; }).join(';'); }).join('\r\n');
+    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([txt], { type: 'text/csv;charset=utf-8' }));
+    a.download = 'Certificacion_Plan_Dual.csv'; document.body.appendChild(a); a.click(); a.remove();
+  };
+
+  var s = PDAcceso.sesion();
+  if (s && s.ses) entrar(s); else PDAcceso.boton($('gbtn'), entrar, function(m){ $('lmsg').textContent = m; }, 'cert');
+})();
+</script>
+<script>if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(function(){});</script>
+</body>
+</html>
