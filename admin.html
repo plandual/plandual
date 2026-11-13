@@ -93,6 +93,21 @@ input:focus,textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 
       <a class="btn" href="certificacion.html">Ver y descargar la certificación →</a>
     </section>
 
+    <section class="card" id="cDir">
+      <h2>👩‍🏫 Directivos habilitados para cargar estudiantes</h2>
+      <p class="hint">Solo las cuentas de esta lista (y los administradores) pueden cargar estudiantes en la certificación. Al habilitar a alguien le llega un email con el enlace; entra con «Iniciar sesión con Google» usando ese Gmail.</p>
+      <form id="fDir" class="grid">
+        <div><label for="dEmail">Gmail del directivo/a</label><input id="dEmail" type="email" placeholder="director@gmail.com"></div>
+        <div><label for="dNombre">Nombre</label><input id="dNombre" placeholder="Nombre y apellido"></div>
+        <div><label for="dInst">Institución</label><input id="dInst" placeholder="Ej.: IPET 50"></div>
+        <div class="row" style="grid-column:1/-1"><label for="dVarios" style="margin:0">Varios a la vez (opcional): uno por línea → <i>email, nombre, institución</i></label></div>
+        <div style="grid-column:1/-1"><textarea id="dVarios" rows="3" style="width:100%;font:inherit;border:1.5px solid #E3E8F2;border-radius:10px;padding:10px" placeholder="director1@gmail.com, Ana Pérez, IPET 50&#10;director2@gmail.com, Juan Gómez, IPEA 222"></textarea></div>
+        <div class="row" style="grid-column:1/-1;gap:14px"><label style="display:flex;gap:8px;align-items:center;text-transform:none;letter-spacing:0;font-size:14px;margin:0"><input type="checkbox" id="dAvisar" checked style="width:auto"> Enviarles el email con el enlace</label><button class="btn" id="dBtn">Habilitar</button></div>
+      </form>
+      <p class="msg" id="dMsg"></p>
+      <div style="overflow-x:auto"><table class="acc"><thead><tr><th>CUENTA</th><th>NOMBRE</th><th>INSTITUCIÓN</th><th>HABILITADO POR</th><th></th></tr></thead><tbody id="dLista"><tr><td colspan="5" class="hint">Cargando…</td></tr></tbody></table></div>
+    </section>
+
     <section class="card" id="cEst">
       <h2>📊 Estadísticas del relevamiento</h2>
       <p class="hint">Resumen en vivo de la consulta para la normativa. El tablero completo muestra el detalle por eje, lo que escribió cada sector y permite descargar el informe.</p>
@@ -198,7 +213,7 @@ function conGoogle(s){
   modo = 'google'; $('gmsg').textContent = 'Verificando…';
   llamar({ accion:'login' }).then(function(j){
     if (!j.ok) { if (j.vencida) { PDAcceso.salir(); location.reload(); return; } throw new Error(j.error || 'No autorizado'); }
-    $('gmsg').textContent = ''; $('quien').textContent = s.email; cargar(j); estadisticas(); accesos();
+    $('gmsg').textContent = ''; $('quien').textContent = s.email; cargar(j); estadisticas(); accesos(); directores();
   }).catch(function(e){ error($('gmsg'), e); });
 }
 var guardada = PDAcceso.sesion();
@@ -284,6 +299,38 @@ $('fComp').onsubmit = function(e){
     pintarAccesos(j); $('cMsg').className = 'msg ok'; $('cMsg').textContent = '✓ Listo: ' + em + ' ya puede ver el tablero y recibió la invitación por email.';
     $('cEmail').value = ''; $('cNombre').value = ''; $('cAdm').checked = false;
   }).catch(function(e){ $('cMsg').className = 'msg err'; $('cMsg').textContent = e.message; }).then(function(){ $('cBtn').disabled = false; });
+};
+
+/* ---------- Directivos habilitados para la certificación ---------- */
+function pintarDir(j){
+  if (!j.ok) throw new Error(j.error || 'No se pudo leer la lista');
+  $('dLista').innerHTML = j.directores.map(function(d){
+    return '<tr><td>' + esc(d.email) + '</td><td>' + esc(d.nombre) + '</td><td>' + esc(d.institucion) + '</td><td class="hint">' + esc(d.por || '') + '</td><td><button type="button" data-q="' + esc(d.email) + '">Quitar</button></td></tr>';
+  }).join('') || '<tr><td colspan="5" class="hint">Todavía no hay directivos habilitados.</td></tr>';
+  document.querySelectorAll('#dLista button[data-q]').forEach(function(b){
+    b.onclick = function(){
+      if (b.dataset.ok !== '1') { b.dataset.ok = '1'; b.textContent = '¿Confirmar?'; return; }
+      b.disabled = true; PDAcceso.llamar({ accion:'dirQuitar', email: b.dataset.q }).then(pintarDir).catch(function(e){ $('dMsg').className = 'msg err'; $('dMsg').textContent = e.message; });
+    };
+  });
+  return j;
+}
+function directores(){
+  if (modo !== 'google') return;
+  PDAcceso.llamar({ accion:'dirListar' }).then(pintarDir).catch(function(e){ $('dMsg').className = 'msg err'; $('dMsg').textContent = e.message; });
+}
+$('fDir').onsubmit = function(e){
+  e.preventDefault();
+  var lista = [];
+  if ($('dEmail').value.trim()) lista.push({ email: $('dEmail').value.trim(), nombre: $('dNombre').value.trim(), institucion: $('dInst').value.trim() });
+  $('dVarios').value.split(/\n+/).forEach(function(l){ var p = l.split(/[,;\t]/).map(function(x){ return x.trim(); }); if (p[0]) lista.push({ email: p[0], nombre: p[1] || '', institucion: p[2] || '' }); });
+  if (!lista.length) { $('dMsg').className = 'msg err'; $('dMsg').textContent = 'Escribí al menos un email.'; return; }
+  $('dBtn').disabled = true; $('dMsg').className = 'msg'; $('dMsg').textContent = 'Habilitando…';
+  PDAcceso.llamar({ accion:'dirAgregar', lista: JSON.stringify(lista), avisar: $('dAvisar').checked ? 'SI' : 'NO' }).then(function(j){
+    pintarDir(j); $('dMsg').className = 'msg ok';
+    $('dMsg').textContent = '✓ ' + j.agregados + ' habilitado/s' + ($('dAvisar').checked ? ' y avisado/s por email.' : '.') + (j.errores && j.errores.length ? ' Revisá estos emails: ' + j.errores.join(', ') : '');
+    $('dEmail').value = ''; $('dNombre').value = ''; $('dInst').value = ''; $('dVarios').value = '';
+  }).catch(function(e){ $('dMsg').className = 'msg err'; $('dMsg').textContent = e.message; }).then(function(){ $('dBtn').disabled = false; });
 };
 
 $('bSalir').onclick = function(){ PDAcceso.salir(); clave = ''; location.reload(); };
