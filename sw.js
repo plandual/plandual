@@ -1,7 +1,7 @@
 /* Plan Dual · service worker: la app se instala y funciona en el celular.
    Siempre busca la versión nueva en la red; si no hay conexión, muestra la última guardada.
    Los datos (Apps Script) nunca se guardan en el teléfono. */
-const CACHE = 'plandual-v8';
+const CACHE = 'plandual-v9';
 self.addEventListener('install', e => {
   self.skipWaiting();
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(['./', 'index.html', 'consulta.html', 'certificacion.html', 'privacidad.html', 'assets/config.js', 'assets/acceso.js', 'assets/preguntas.js', 'assets/icon-192.png']).catch(() => {})));

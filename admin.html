@@ -119,12 +119,12 @@ input:focus,textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 
     </section>
 
     <section class="card" id="cComp">
-      <h2>🔐 Compartir el tablero</h2>
-      <p class="hint">Solo pueden ver el tablero las cuentas de esta lista. Al compartir, la persona recibe un email con el enlace; para entrar toca «Iniciar sesión con Google» con esa cuenta.</p>
+      <h2>🔐 Perfiles de acceso: consulta y administración</h2>
+      <p class="hint"><b>Consulta (solo lectura):</b> ve el tablero del relevamiento y la certificación de todas las escuelas y puede descargar, pero no modifica nada. <b>Administración:</b> además edita el sitio, habilita directivos y corrige datos. La persona recibe un email con el enlace y entra con «Iniciar sesión con Google».</p>
       <form id="fComp" class="grid">
         <div><label for="cEmail">Gmail de la persona</label><input id="cEmail" type="email" required placeholder="nombre@gmail.com"></div>
         <div><label for="cNombre">Nombre o área</label><input id="cNombre" placeholder="Ej.: Subsecretaría"></div>
-        <div class="row"><label style="display:flex;gap:8px;align-items:center;text-transform:none;letter-spacing:0;font-size:14px;margin:0"><input type="checkbox" id="cAdm" style="width:auto"> También puede administrar el sitio</label></div>
+        <div class="row"><label style="display:flex;gap:8px;align-items:center;text-transform:none;letter-spacing:0;font-size:14px;margin:0"><input type="checkbox" id="cAdm" style="width:auto"> Perfil de administración (si no se marca: solo consulta)</label></div>
         <div><button class="btn" id="cBtn">Compartir y enviar invitación</button></div>
       </form>
       <p class="msg" id="cMsg"></p>
@@ -210,7 +210,7 @@ function error(el, err){ el.className = 'msg err'; el.textContent = err.message 
 
 /* Ingreso con Google */
 function conGoogle(s){
-  if (!s.administra) { $('gmsg').textContent = 'Tu cuenta (' + s.email + ') puede ver el tablero, pero no administrar el sitio.'; return; }
+  if (!s.administra) { $('gmsg').innerHTML = 'Tu cuenta (' + esc(s.email) + ') tiene <b>perfil de consulta</b>: podés ver la información pero no modificarla.<br><a class="btn" style="margin-top:10px" href="tablero.html">📊 Ver el tablero</a> <a class="btn ln" style="margin-top:10px" href="certificacion.html">🎓 Ver la certificación</a>'; return; }
   modo = 'google'; $('gmsg').textContent = 'Verificando…';
   llamar({ accion:'login' }).then(function(j){
     if (!j.ok) { if (j.vencida) { PDAcceso.salir(); location.reload(); return; } throw new Error(j.error || 'No autorizado'); }
@@ -278,7 +278,7 @@ $('eCopiar').onclick = function(){
 function pintarAccesos(j){
   if (!j.ok) throw new Error(j.error || 'No se pudo leer la lista');
   $('cLista').innerHTML = j.accesos.map(function(a){
-    var perm = a.administra ? 'Tablero + administra' : (a.tablero ? 'Ve el tablero' : 'Sin acceso');
+    var perm = a.administra ? 'Administración' : (a.tablero ? 'Consulta (solo lectura)' : 'Sin acceso');
     return '<tr><td>' + esc(a.email) + '</td><td>' + esc(a.nombre) + '</td><td><span class="pill">' + perm + '</span></td><td>' +
       (a.email === j.yo ? '<span class="hint">vos</span>' : '<button type="button" data-q="' + esc(a.email) + '">Quitar</button>') + '</td></tr>';
   }).join('') || '<tr><td colspan="4" class="hint">Sin cuentas</td></tr>';
@@ -297,7 +297,7 @@ $('fComp').onsubmit = function(e){
   e.preventDefault(); var em = $('cEmail').value.trim().toLowerCase();
   $('cBtn').disabled = true; $('cMsg').className = 'msg'; $('cMsg').textContent = 'Compartiendo…';
   PDAcceso.llamar({ accion:'compartir', email: em, nombre: $('cNombre').value.trim(), administra: $('cAdm').checked ? 'SI' : 'NO' }).then(function(j){
-    pintarAccesos(j); $('cMsg').className = 'msg ok'; $('cMsg').textContent = '✓ Listo: ' + em + ' ya puede ver el tablero y recibió la invitación por email.';
+    pintarAccesos(j); $('cMsg').className = 'msg ok'; $('cMsg').textContent = '✓ Listo: ' + em + ($('cAdm').checked ? ' tiene perfil de administración' : ' tiene perfil de consulta') + ' y recibió la invitación por email.';
     $('cEmail').value = ''; $('cNombre').value = ''; $('cAdm').checked = false;
   }).catch(function(e){ $('cMsg').className = 'msg err'; $('cMsg').textContent = e.message; }).then(function(){ $('cBtn').disabled = false; });
 };

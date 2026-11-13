@@ -126,7 +126,7 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
   var DEPTOS = ['Calamuchita','Capital','Colón','Cruz del Eje','General Roca','General San Martín','Ischilín','Juárez Celman','Marcos Juárez','Minas','Pocho','Presidente Roque Sáenz Peña','Punilla','Río Cuarto','Río Primero','Río Seco','Río Segundo','San Alberto','San Javier','San Justo','Santa María','Sobremonte','Tercero Arriba','Totoral','Tulumba','Unión'];
   var ESPEC = ['Electromecánica','Electrónica','Electricidad','Automotores','Mecánica','Maestro Mayor de Obras','Construcciones','Química','Industrias de procesos','Informática','Programación','Producción agropecuaria','Agroalimentos','Tecnología de los alimentos','Aeronáutica','Energías renovables','Equipos e instalaciones electromecánicas'];
   var FIJOS = ['departamento','localidad','institucion'];
-  var filas = [], admin = false, editId = null;
+  var filas = [], admin = false, consulta = false, editId = null;
 
   $('departamento').innerHTML += DEPTOS.map(function(d){ return '<option>'+esc(d)+'</option>'; }).join('');
   $('lEsc').innerHTML = (window.RELEV ? RELEV.ESCUELAS_BASE : []).map(function(e){ return '<option value="'+esc(e)+'">'; }).join('');
@@ -143,7 +143,7 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
 
   function resp(j){
     if (!j.ok) { if (j.vencida) salir('Tu sesión venció. Ingresá nuevamente.'); throw new Error(j.error || 'Error'); }
-    filas = j.filas || []; admin = !!j.admin; pintar(); return j;
+    filas = j.filas || []; admin = !!j.admin || !!j.consulta; consulta = !!j.consulta; $('boxForm').hidden = consulta; pintar(); return j;
   }
   function cargar(){ PDAcceso.llamar({ accion: 'certListar' }).then(resp).catch(function(e){ $('fmsg').className = 'msg err'; $('fmsg').textContent = e.message; }); }
 
@@ -151,13 +151,13 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
   function pintar(){
     var q = $('buscar').value.trim().toLowerCase();
     var vis = filas.filter(function(f){ return !q || [f.estudiante, f.dni, f.institucion, f.localidad, f.empresa].join(' ').toLowerCase().indexOf(q) > -1; });
-    $('lTit').textContent = admin ? 'Todos los estudiantes cargados (vista de administración)' : 'Tus estudiantes cargados';
+    $('lTit').textContent = consulta ? 'Todos los estudiantes cargados (perfil de consulta · solo lectura)' : admin ? 'Todos los estudiantes cargados (vista de administración)' : 'Tus estudiantes cargados';
     $('thead').innerHTML = (admin ? '<th>Departamento</th><th>Localidad</th>' : '') + COLS.map(function(c){ return '<th>'+c[1]+'</th>'; }).join('') + (admin ? '<th>Cargado por</th>' : '') + '<th></th>';
     $('tb').innerHTML = vis.map(function(f){
       return '<tr>' + (admin ? '<td>'+esc(f.departamento)+'</td><td>'+esc(f.localidad)+'</td>' : '') + COLS.map(function(c){
         var v = f[c[0]], cl = c[0] === 'dni' ? ' class="num"' : (v === 'Sí' ? ' class="si"' : v === 'No' ? ' class="no"' : '');
         return '<td'+cl+'>'+esc(v)+'</td>'; }).join('') + (admin ? '<td>'+esc(f.por)+'</td>' : '') +
-        '<td style="white-space:nowrap"><button class="btn ln sm" data-ed="'+esc(f.id)+'">Editar</button> <button class="btn ln sm" data-rm="'+esc(f.id)+'" style="color:var(--red)">Eliminar</button></td></tr>';
+        (consulta ? '<td></td>' : '<td style="white-space:nowrap"><button class="btn ln sm" data-ed="'+esc(f.id)+'">Editar</button> <button class="btn ln sm" data-rm="'+esc(f.id)+'" style="color:var(--red)">Eliminar</button></td>') + '</tr>';
     }).join('');
     $('vacio').hidden = filas.length > 0;
     var si = filas.filter(function(f){ return f.acredita === 'Sí'; }).length, esc_ = {};
