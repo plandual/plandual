@@ -745,12 +745,16 @@ if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catc
   document.body.appendChild(f);
   function instalar(){
     if (ev) { ev.prompt(); ev.userChoice.then(function(){ ev = null; f.hidden = true; if (b) b.hidden = true; }); return; }
-    alert(ios ? 'En iPhone: tocá el botón Compartir (cuadrado con flecha) y elegí «Agregar a inicio».'
-              : 'Abrí el menú ⋮ de Chrome y elegí «Instalar app» o «Agregar a la pantalla principal».');
+    if (ios) { alert('En iPhone: tocá el botón Compartir (cuadrado con flecha) y elegí «Agregar a inicio».'); return; }
+    // Android/PC: el navegador todavía no habilitó la instalación; la esperamos unos segundos
+    var t = f.textContent; f.textContent = 'Preparando…'; f.disabled = true;
+    var n = 0, iv = setInterval(function(){
+      if (ev || ++n > 16) { clearInterval(iv); f.textContent = t; f.disabled = false;
+        if (ev) instalar(); else alert('Abrí el menú ⋮ de Chrome y elegí «Instalar app» o «Agregar a la pantalla principal».'); }
+    }, 250);
   }
   window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); ev = e; if (!st) { f.hidden = false; if (b) b.hidden = false; } });
   if (!st && ios) { f.hidden = false; if (b) b.hidden = false; }
-  if (location.hash === '#instalar' && !st) { f.hidden = false; if (b) b.hidden = false; }
   f.onclick = instalar; if (b) b.onclick = instalar;
   window.addEventListener('appinstalled', function(){ f.hidden = true; if (b) b.hidden = true; });
 })();
